@@ -281,6 +281,37 @@
 
 
 
+
+        <section data-auto-animate>
+            <h1 class='r-fit-text'>
+                E em ambientes de fácil interação e visualização, como o Google Colab
+            </h1>
+
+            <div style='display: flex; justify-content: center;'>
+                <div style='flex: none'>
+                    <a href="https://colab.research.google.com/">
+                        <img
+                            src='images/google-colab.png'
+                            style='height: 5em; vertical-align: bottom; margin-top: 3em;'
+                        />
+                    </a>
+                    <a href="https://colab.research.google.com/">
+                        <img
+                            src='images/colab-print.png'
+                            style='
+                                height: 5em;
+                                vertical-align: bottom;
+                                margin-top: 3em;
+                                border: .2ex dashed;
+                                padding: 2px;
+                            '
+                        />
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
         <section data-auto-animate>
             <h4>Antes de aprendermos a linguagem...</h4>
             <h3 class='fragment'>O que significa programar?</h3>
@@ -301,149 +332,11 @@
                     </ul>
                 </li>
             </ul>
-            <div class='fragment local-standout-box' style='margin-top: -1em;'>
+            <div class='fragment local-standout-box' style='margin-top: -3em;'>
                 Combinando esses tipos de instruções, podemos instruir o
                 computador a realizar diversas tarefas!
             </div>
         </section>
-
-
-
-        <section data-auto-animate>
-            <h4>Exemplo</h4>
-            <p>
-                Vamos escrever um programa para requisitar uma senha secreta!
-            </p>
-        </section>
-        <section data-auto-animate>
-            <p style='opacity: .5'>
-                Vamos escrever um programa para requisitar uma senha secreta!
-            </p>
-            <p>Estratégia: repetidamente pedir que o usuário digite a senha até
-            que a mesma esteja correta.</p>
-        </section>
-        <section data-auto-animate>
-            <p>Estratégia: repetidamente pedir que o usuário digite a senha até
-            que a mesma esteja correta.</p>
-            <object
-                data-id='fluxograma'
-                type='image/svg+xml'
-                data='images/exemplo-senha-fluxograma.svg'
-                style='height: 10em; margin-left: 1ex;'
-            ></object>
-            <p>Fluxograma</p>
-        </section>
-        <section data-auto-animate>
-            <p>Código em Python</p>
-            <div style='display: flex; align-items: center;'>
-                <div class='ace-brython'
-                     data-id='codigo'
-                     data-readonly
-                     data-max-lines='14'
-                     data-components='code'
-                     style='height: 14em; flex: 0; font-size: .5em;'
-                 >
-                    <script type='text/x.ace-brython'>
-                        resposta = ''
-
-                        # Bloco de repetição
-                        while resposta != 'Python rocks':
-
-                            print('Qual é a senha?')
-                            resposta = input()
-
-                            # Bloco condicional
-                            if resposta == 'Python rocks':
-                                print('Senha correta!')
-                            else:
-                                print('Senha incorreta!')
-                        # Fim
-                    </script>
-                </div>
-                <object
-                    data-id='fluxograma'
-                    type='image/svg+xml'
-                    data='images/exemplo-senha-fluxograma.svg'
-                    style='height: 10em; flex: 1; margin-left: 1ex;'
-                ></object>
-            </div>
-            <div class='fragment local-standout-box' style='font-size: .6em; max-width: 20em;'>
-                Bem, o fluxograma está menos detalhado que o código...
-                Vamos deixá-lo mais detalhado para entendermos melhor o
-                exemplo.
-            </div>
-        </section>
-        <section data-auto-animate>
-            <p>Código em Python e o fluxograma detalhado</p>
-            <div style='display: flex; align-items: center;'>
-                <div class='ace-brython'
-                     data-id='codigo'
-                     data-readonly
-                     data-components='code'
-                     style='height: 14em; flex: 0; font-size: .5em;'
-                 >
-                    <script type='text/x.ace-brython'>
-                        resposta = ''
-
-                        # Bloco de repetição
-                        while resposta != 'Python rocks':
-
-                            print('Qual é a senha?')
-                            resposta = input()
-
-                            # Bloco condicional
-                            if resposta == 'Python rocks':
-                                print('Senha correta!')
-                            else:
-                                print('Senha incorreta!')
-                        # Fim
-                    </script>
-                </div>
-                <object
-                    data-id='fluxograma-equivalente'
-                    type='image/svg+xml'
-                    data='images/exemplo-senha-fluxograma-equivalente-codigo.svg'
-                    style='flex: 1; margin-left: 1ex; height: 12em; font-size: 1em;'
-                ></object>
-                <script>(async function() {
-                    let codeContainer = document.currentScript.parentNode.querySelector('.ace-brython')
-                    let svgObject = document.currentScript.parentNode.querySelector('object')
-                    let observer = new MutationObserver((mutations) => {
-                      const lineNumber = codeContainer.dataset.lineNumber
-                      const matched = svgObject.contentDocument.querySelectorAll(`[data-line-numbers~="${lineNumber}"]`)
-                      if (!matched.length) {
-                        return;
-                      }
-
-                      const allElements = svgObject.contentDocument.querySelectorAll('[data-line-numbers]')
-                      for (let el of allElements) {
-                        el.style.stroke = ''
-                        el.style.strokeWidth = ''
-                      }
-                      for (let el of matched) {
-                        el.style.stroke = '#135677'
-                        el.style.strokeWidth = '.5em'
-                      }
-                    })
-                    observer.observe(codeContainer, {
-                        attributes: true,
-                        attributeFilter: ['data-line-number'],
-                    })
-
-                    svgObject.onload = () => {
-                      const allElements = svgObject.contentDocument.querySelectorAll('[data-line-numbers]')
-                      for (let el of allElements) {
-                        el.style.transition = 'all .5s'
-                        el.addEventListener('mouseover', e => {
-                          const lineNumber = e.target.dataset.lineNumbers.split(/\s+/)[0];
-                          codeContainer.dataset.lineNumber = lineNumber;
-                        })
-                      }
-                    }
-                })()</script>
-            </div>
-        </section>
-
 
         <section>
             <h4>Vamos começar pelo básico</h4>
@@ -687,7 +580,7 @@
             </table>
             <p class='fragment'> ... e vários outros! </p>
             <div class='fragment local-standout-box' style='top: 50%'>
-                 Além disso, podemos criar nossos própios tipos!
+                 Além disso, podemos criar nossos próprios tipos!
                  <template data-reuse='moving-face'></template>
             </div>
         </section>
@@ -1577,7 +1470,7 @@
                         print('Você precisará fazer ' + str(42 * 1.5) + ' hambúrgueres, certo?')
                         print('Para isso, você precisará comprar:')
                         print(str(42 * 1.5 * 120 / 1000) + ' kg de carne moída magra')
-                        print(str(42 * 1.5 * 80 / 1000) + ' kg de carne moída magra')
+                        print(str(42 * 1.5 * 80 / 1000) + ' kg de carne moída gorda')
                         print(str(42 * 1.5 * 22 / 1000) + ' kg de queijo')
                         print(str(42 * 1.5 * 20 / 1000) + ' kg de bacon')
 
@@ -1620,7 +1513,7 @@
              print('Para isso, você precisará comprar:')
             -print(str(42 * 1.5 * 120 / 1000) + ' kg de carne moída magra')
             +print(str(57 * 1.5 * 120 / 1000) + ' kg de carne moída magra')
-             print(str(42 * 1.5 * 80 / 1000) + ' kg de carne moída magra')
+             print(str(42 * 1.5 * 80 / 1000) + ' kg de carne moída gorda')
             -print(str(42 * 1.5 * 22 / 1000) + ' kg de queijo')
             -print(str(42 * 1.5 * 20 / 1000) + ' kg de bacon')
             +print(str(57 * 1.5 * 22 / 1000) + ' kg de queijo')
@@ -1807,6 +1700,53 @@
         </section>
 
 
+        <section data-auto-animate>
+            <div style='
+                height: var(--slide-height);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                z-index: 0;
+                '
+            >
+                <h4 style='flex: none;'>Programa [ainda não] utilizando variáveis</h4>
+                <div class='ace-brython'
+                     style='
+                        font-size: .5em;
+                        flex: 1;
+                        margin-bottom: 2em;
+                     '
+                     data-min-lines='15'
+                     data-max-lines='20'
+                >
+                    <script type='text/x.ace-brython'>
+                        # Número de convidados: 42
+                        # Hambúrguer por convidado: 1.5
+                        # Receita
+                        #   Carne Magra: 120g
+                        #   Carne Gorda:  80g
+                        #        Queijo:  22g
+                        #         Bacon:  20g
+                        #         Tomate: 30g (2 rodelas)
+
+
+                        print('Olá, Alice!')
+                        print('Você precisará fazer ' + str(42 * 1.5) + ' hambúrgueres, certo?')
+                        print('Para isso, você precisará comprar:')
+                        print(str(42 * 1.5 * 120 / 1000) + ' kg de carne moída magra')
+                        print(str(42 * 1.5 * 80 / 1000) + ' kg de carne moída gorda')
+                        print(str(42 * 1.5 * 22 / 1000) + ' kg de queijo')
+                        print(str(42 * 1.5 * 20 / 1000) + ' kg de bacon')
+
+                        # Vamos considerar que apenas 85% do tomate possa
+                        # ser aproveitado para fazer as rodelas
+                        print(str(42 * 1.5 * 30 / 0.85 / 1000) + ' kg de tomate')
+                    </script>
+                </div>
+            </div>
+        </section>
+
+
 
         <section data-auto-animate>
             <div style='
@@ -1866,8 +1806,7 @@
         <section data-auto-animate>
             <h3>Variáveis</h3>
             <p>
-                Para finalizarmos esta aula, algumas observações sobre
-                nomes de variáveis:
+                Algumas observações sobre nomes de variáveis:
             </p>
             <ul>
                 <li>
@@ -1923,6 +1862,619 @@
                 <code>nome-cliente</code>
             </div>
         </section>
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <div class='r-stack'>
+            <p class='fragment fade-out' data-fragment-index='0'>
+              Lá em nossas aulas de matemática, nós aprendemos sobre
+              <em>funções</em>:
+            </p>
+            <p class='fragment' data-fragment-index='0'>
+              De forma semelhante, Python também possui o conceito de
+              <strong>funções</strong>:
+            </p>
+          </div>
+          <div style='display: flex; gap: 1ex; margin-top: 1ex;'>
+            <div
+              style='
+                display: flex;
+                flex-flow: column;
+                gap: 2ex;
+                text-align: left;
+                font-size: .9em;
+                background-color: #fff;
+                color: #555;
+                padding: 1ex;
+              '
+            >
+              <div>
+                Definição de <span class='local-math-font'>f</span>:
+                &nbsp;<span class='local-math-font'>f(x) = x²</span>
+              </div>
+              <div style='font-size: .8em;'>
+                Função <span class='local-math-font'>f</span> aplicada:
+                <div class='local-math-font'>
+                  f(0) = 0<br/>
+                  f(1) = 1<br/>
+                  f(3.14) = 9.8596<br/>
+                  f(-12) = 144
+                </div>
+              </div>
+            </div>
+            <div class='fragment' style='flex: 1' data-fragment-index='0'>
+              <div class='python-repl'><!--
+                >>> def f(x):
+                ...     return x**2
+                ... 
+                >>> f(0)
+                0
+                >>> f(1)
+                1
+                >>> f(3.14)
+                9.8596
+                >>> f(-12)
+                144
+              --></div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>
+            Uma <strong>função</strong> pode ser vista como um "mini-programa"
+            que é executado toda vez que ela é <strong>chamada</strong>
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p style='font-size: .8em'>
+            Por exemplo, vamos definir uma função para calcular o Índice de
+            Massa Corporal:
+          </p>
+          <div class='ace-brython fragment' data-readonly data-components='code'>
+            <script type='text/x.ace-brython' data-id='imc-def'>
+              def imc(massa, altura):
+                  return massa / altura**2
+            </script>
+          </div>
+
+          <div style='text-align: left; font-size: .7em;'>
+            <ul>
+              <li class='fragment'>
+                A palavra-chave <code>def</code> indica que estamos definindo
+                uma nova função
+              </li>
+              <li class='fragment'>
+                O <strong>nome</strong> de nossa função é <code>imc</code>
+              </li>
+              <li class='fragment'>
+                Nossa função possui dois <strong>parâmetros</strong>,
+                <code>massa</code> e <code>altura</code>, que são utilizados
+                como variáveis dentro do seu corpo
+              </li>
+              <li class='fragment'>
+                O <strong>corpo</strong> de nossa função é formado pelas
+                instruções que a função executará
+                <ul>
+                  <li>
+                    Neste exemplo, temos apenas a instrução
+                    <code>return massa / altura**2</code>, que define o
+                    <strong>valor de retorno</strong> da função
+                  </li>
+                  <li>
+                    Note que há um nível de <strong>indentação</strong>
+                    (espaços à esquerda) requerido no corpo da função
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p style='font-size: .8em'>
+            Agora podemos utilizar nossa função:
+          </p>
+          <div class='ace-brython fragment' style='height: 5em;' data-readonly>
+            <script type='text/x.ace-brython' data-parent='imc-def'>
+              imc_gustavo = imc(60, 1.63)
+              print('O IMC de Gustavo é ' + str(imc_gustavo))
+            </script>
+          </div>
+          <div style='text-align: left; font-size: .7em;'>
+            <ul>
+              <li class='fragment'>
+                Na linha 1, estamos <strong>chamando</strong> (ou
+                <strong>invocando</strong>) a função <code>imc</code>
+              </li>
+              <li class='fragment'>
+                Os valores <code>60</code> e <code>1.63</code> são os
+                <strong>argumentos</strong> desta chamada. Esses argumentos são
+                respectivamente atribuídos aos parâmetros <code>massa</code> e
+                <code>altura</code> da função
+              </li>
+              <li class='fragment'>
+                Esta chamada faz com que as instruções do corpo da função sejam
+                executadas.
+              </li>
+              <li class='fragment'>
+                Quando a execução da função é executada, seu valor de retorno
+                será o resultado da chamada.
+              </li>
+            </ul>
+        </section>
+
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <div class='ace-brython' style='height: 12em;'>
+            <div class='ace-brython'
+                style='
+                font-size: .8em;
+                flex: 1;
+                margin-bottom: 2em;
+                '
+            >
+                <script type='text/x.ace-brython' data-parent='imc-def'>
+                  def imc(massa, altura):
+                      return massa / altura**2
+
+
+                  print('O IMC de Gustavo é ' + str(imc(60, 1.63)))
+                  print('O IMC de Juvenal é ' + str(imc(98, 1.90)))
+                  print('O IMC de Antônia é ' + str(imc(54, 1.65)))
+                </script>
+            </div>
+          </div>
+          <div style='text-align: left; font-size: .8em; margin-top: -4ex;'>
+            Principais benefícios do uso de funções:
+            <ul>
+              <li>
+                <strong>Reutilização de lógica/código</strong>
+              </li>
+              <li>
+                Código fonte fica mais fácil de ler
+              </li>
+              <li>
+                Facilita a manutenção do código
+              </li>
+            </ul>
+          </div>
+          <div class='local-standout-box fragment' style='top: 4em'>
+            Isso se torna mais aparente quando escrevemos códigos mais
+            complexos
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>Funções não precisam necessariamente retornar um valor:</p>
+          <div class='ace-brython'>
+            <script type='text/x.ace-brython'>
+              def say_hello(name):
+                  print('Hello ' + name)
+                  print('Goodbye ' + name)
+
+              say_hello('Alice')
+              say_hello('Bob')
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>E também não precisam obrigatoriamente definir parâmetros:</p>
+          <div class='ace-brython'>
+            <script type='text/x.ace-brython'>
+              def say_hello():
+                  print('Hello stranger')
+                  print('Goodbye stranger')
+
+              say_hello()
+              say_hello()
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>Os parâmetros podem ser definidos com valores padrões:</p>
+          <div class='ace-brython'>
+            <script type='text/x.ace-brython'>
+              def say_hello(name='stranger'):
+                  print('Hello ' + name)
+                  print('Goodbye ' + name)
+
+              say_hello('Alice')
+              say_hello()
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>É possível passar argumentos através da sintaxe de
+          <strong>palavras-chave</strong>:</p>
+          <div class='ace-brython' style='font-size: .58em'>
+            <script type='text/x.ace-brython'>
+              def say_hello(name, age):
+                  print('Hello ' + name)
+                  print('Hopefully, in one year you will be ' + str(age + 1))
+
+              say_hello('Alice', 27)
+              say_hello(name='Bob', age=25)
+              say_hello(age=90, name='Ricardo')
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>Uma função pode chamar outras funções em
+          seu corpo:</p>
+          <div class='ace-brython' style='font-size: .5em'>
+            <script type='text/x.ace-brython'>
+              def tell_future(age):
+                  print('If you don\'t die, in one year you will be ' + str(age + 1))
+
+              def say_hello(name, age):
+                  print('Hello ' + name)
+                  tell_future(age)
+                  print('Goodbye ' + name)
+
+              say_hello('Alice', 27)
+              say_hello(name='Bob', age=25)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>É possível utilizar variáveis dentro das funções:</p>
+          <div class='ace-brython' style='font-size: .5em'>
+            <script type='text/x.ace-brython'>
+              def tell_future(age):
+                  next_age = age + 1
+                  print('If you don\'t die, in one year you will be ' + str(next_age))
+
+              def say_hello(name, age):
+                  print('Hello ' + name)
+                  tell_future(age)
+                  print('Goodbye ' + name)
+
+              say_hello('Alice', 27)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p style='font-size: .7em;'>Note que a variável <code>next_age</code>
+          é acessível apenas <strong>dentro</strong> da função onde ela foi
+          criada:</p>
+          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
+            <script type='text/x.ace-brython'>
+              def tell_future(age):
+                  next_age = age + 1
+                  print('If you don\'t die, in one year you will be ' + str(next_age))
+
+              def say_hello(name, age):
+                  print('Hello ' + name)
+                  tell_future(age)
+                  print('Goodbye ' + name)
+
+              say_hello('Alice', 27)
+
+              print(next_age) # Essa linha vai FALHAR!
+            </script>
+          </div>
+          <div class='local-standout-box fragment' style='font-size: .8em; bottom: 2em;'>
+            Nós dizemos que <code>next_age</code> é uma <strong>variável
+            local</strong> da função <code>tell_future</code>, e a mesma é
+            <strong>descartada</strong> quando a função retorna.
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>Mas é okay uma função acessar uma variável
+          <strong>global</strong>:</p>
+          <div class='ace-brython' style='font-size: .5em;'>
+            <script type='text/x.ace-brython'>
+              PI = 3.1416 # PI é uma variável global
+
+              def area_circulo(raio):
+                  return PI * raio**2
+
+              print('A área de um círculo de raio 3 é ' + str(area_circulo(3)))
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p>Variáveis locais "escondem" variáveis globais:</p>
+          <div class='ace-brython' style='font-size: .5em;'>
+            <script type='text/x.ace-brython'>
+              ultima_compra = 'gravata'
+
+              def nova_compra(produto, preco):
+                  print('Nova compra: ' + produto)
+                  print('Valor da compra: ' + str(preco))
+                  ultima_compra = produto
+
+              nova_compra('camiseta', 48)
+              nova_compra('sapato', 80)
+              print('A última compra realizada foi: ' + ultima_compra)
+            </script>
+          </div>
+          <div class='local-standout-box fragment' style='font-size: .7em;'>
+            Com a atribuição <code>ultima_compra = produto</code>, Python
+            entende que está sendo criada uma nova variável local chamada
+            <code>ultima_compra</code>, que existe apenas no
+            <strong>escopo</strong> da função <code>nova_compra</code>.
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Funções</h3>
+          <p style='font-size: .7em'>Quer dizer... Funções até conseguem
+          alterar variáveis globais, mas para isso é necessário o uso da
+          palavra-chave <code>global</code>:</p>
+          <div class='ace-brython' style='font-size: .5em;'>
+            <script type='text/x.ace-brython'>
+              ultima_compra = 'gravata'
+
+              def nova_compra(produto, preco):
+                  global ultima_compra
+                  print('Nova compra: ' + produto)
+                  print('Valor da compra: ' + str(preco))
+                  ultima_compra = produto
+
+              nova_compra('camiseta', 48)
+              nova_compra('sapato', 80)
+              print('A última compra realizada foi: ' + ultima_compra)
+            </script>
+          </div>
+          <div class='local-standout-box fragment' style='font-size: .7em; bottom: 2em;'>
+            Entretanto, esta prática é geralmente
+            <strong>desencorajada</strong> - são poucos os casos onde desejamos
+            que funções tenham efeitos colaterais em variáveis globais.
+          </div>
+        </section>
+
+
+
+        <section>
+          <p style='font-size: .55em'>Python já vem com diversas funções
+          <em>built-in</em> (pré-definidas) para nossa conveniência:</p>
+          <div class='python-repl' style='font-size: .45em;'><!--
+          >>> abs(-9) # Valor absoluto de um número
+          9
+          >>> divmod(10, 3) # Quociente e o resto da divisão de 10 por 3
+          (3, 1)
+          >>> float("5.62") # Conversão para float
+          5.62
+          >>> input('Digite seu nome: ') # Leitura de entrada do usuário
+          Digite seu nome: Meu nome é Alice
+          'Meu nome é Alice'
+          >>> int(3.14) # Conversão para inteiro
+          3
+          >>> len('Python') # Tamanho de um objeto
+          6
+          >>> max(5, 8, -1) # Valor máximo de um conjunto de números
+          8
+          >>> min(5, 8, -1) # Valor mínimo de um conjunto de números
+          -1
+          >>> print("Olá Mundo") # Imprimir algo na tela
+          Olá Mundo
+          >>> round(45.678703, 3) # Arredondar um número
+          45.679
+          --></div>
+          <div style='font-size: .45em'>
+            Lista completa em
+            <a href="https://docs.python.org/3/library/functions.html" target='_blank'>
+              https://docs.python.org/3/library/functions.html</a>
+          </div>
+        </section>
+
+
+
+        <section>
+          <p>Vamos alterar o programa da Alice para utilizar funções!</p>
+        </section>
+
+
+
+        <section>
+            <div style='
+                height: var(--slide-height);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                z-index: 0;
+                '
+            >
+                <h4 style='flex: none; font-style: italic;'>Relembrando...</h4>
+                <div class='ace-brython'
+                     style='
+                        font-size: .5em;
+                        flex: 1;
+                        margin-bottom: 2em;
+                     '
+                     data-min-lines='15'
+                     data-max-lines='20'
+                >
+                    <script type='text/x.ace-brython' data-id='using-vars'>
+                        # Hambúrguer por convidado: 1.5
+                        # Receita
+                        #   Carne Magra: 120g
+                        #   Carne Gorda:  80g
+                        #        Queijo:  22g
+                        #         Bacon:  20g
+                        #         Tomate: 30g (2 rodelas)
+
+                        convidados = 42
+                        num_hamburgueres = convidados * 1.5
+
+                        print('Olá, Alice!')
+                        print('Você precisará fazer ' + str(num_hamburgueres) + ' hambúrgueres, certo?')
+                        print('Para isso, você precisará comprar:')
+                        print(str(num_hamburgueres * 120 / 1000) + ' kg de carne moída magra')
+                        print(str(num_hamburgueres * 80 / 1000) + ' kg de carne moída gorda')
+                        print(str(num_hamburgueres * 22 / 1000) + ' kg de queijo')
+                        print(str(num_hamburgueres * 20 / 1000) + ' kg de bacon')
+
+                        # Vamos considerar que apenas 85% do tomate possa
+                        # ser aproveitado para fazer as rodelas
+                        print(str(num_hamburgueres * 30 / 0.85 / 1000) + ' kg de tomate')
+                    </script>
+                </div>
+            </div>
+            <div class='fragment local-standout-box fade-in-then-out' style='bottom: 3em; z-index: 1;'>
+              Crie uma função responsável por calcular as medidas em Kg.
+              Lembre-se de que ela deve ser genérica o bastante para poder ser
+              reutilizada para o cálculo de qualquer ingrediente
+            </div>
+        </section>
+
+        <section>
+            <div style='
+                height: var(--slide-height);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                z-index: 0;
+                '
+            >
+                <h4>Vamos ajudar o Tio Chico a cumprir promessas!</h4>
+                <div class='ace-brython'
+                     style='
+                        font-size: .5em;
+                        flex: 1;
+                        margin-bottom: 2em;
+                     '
+                     data-min-lines='15'
+                     data-max-lines='20'
+                >
+                    <script type='text/x.ace-brython'>
+                        print('Olá, Tio Chico! Lembra daquele churrasco da admissão?')
+                        num_convidados = 78
+                        buraco_no_estomago = 2
+
+                        def total_comida(convidados, buraco_estomago):
+                            fator = convidados * buraco_estomago
+                            bovina = fator * 200
+                            linguica = fator * 100
+                            frango = fator * 100
+                            pao_de_alho = fator * 200
+                            queijo = fator * 100
+                            vinagrete = fator * 100
+                            carvao = convidados / 5
+
+                            print(str(bovina) + ' g de carne bovina (contra filé wagyu, japonês do tipo a5, com certificado inclusive')
+                            print(str(linguica) + ' g de linguiça toscana tradicional')
+                            print(str(frango) + ' g de tulipa de frango')
+                            print(str(pao_de_alho) + ' g de pão de alho')
+                            print(str(queijo) + ' g de queijo coalho')
+                            print(str(vinagrete) + ' g de vinagrete')
+                            print(str(carvao) + ' saco de carvão (8kg)')
+
+                        print('Para um churrasco com ' + str(num_convidados) + ' convidados você precisará comprar:')
+                        total_comida(num_convidados, buraco_no_estomago)
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div style='
+                height: var(--slide-height);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                z-index: 0;
+                '
+            >
+                <h4>E quanto ao preço?</h4>
+                <div class='ace-brython'
+                     style='
+                        font-size: .5em;
+                        flex: 1;
+                        margin-bottom: 2em;
+                     '
+                     data-min-lines='15'
+                     data-max-lines='20'
+                >
+                    <script type='text/x.ace-brython'>
+                        print('Olá, Tio Chico! Lembra daquele churrasco da admissão?')
+                        num_convidados = 78
+                        buraco_no_estomago = 2
+
+                        def total_preco(convidados, buraco_estomago):
+                            fator = convidados * buraco_estomago
+                            bovina = fator * 200 * 1.89026 # preço por grama
+                            linguica = fator * 100 * 0.02498
+                            frango = fator * 100 * 0.01848
+                            pao_de_alho = fator * 200 * 0.038475
+                            queijo = fator* 100  * 0.02974
+                            vinagrete = fator * 100  * 0.0497
+                            carvao = convidados / 5 * 59.90
+
+                            print('R$'+str(bovina) + ' em carne bovina (contra filé wagyu, japonês do tipo a5, com certificado inclusive)')
+                            print('R$'+str(linguica) + ' em linguiça toscana tradicional')
+                            print('R$'+str(frango) + ' em tulipa de frango')
+                            print('R$'+str(pao_de_alho) + ' em pão de alho')
+                            print('R$'+str(queijo) + ' em queijo coalho')
+                            print('R$'+str(vinagrete) + ' em de vinagrete')
+                            print('R$'+str(carvao) + ' em carvão')
+
+                        print('Para um churrasco com ' + str(num_convidados) + ' convidados você precisará desembolsar:')
+                        total_preco(num_convidados, buraco_no_estomago)
+                    </script>
+                </div>
+            </div>
+        </section>
+
 
 
         <section>
