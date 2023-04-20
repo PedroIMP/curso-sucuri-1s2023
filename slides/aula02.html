@@ -33,707 +33,13 @@
             ## Aula 02
         </section>
 
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <div class='r-stack'>
-            <p class='fragment fade-out' data-fragment-index='0'>
-              Lá em nossas aulas de matemática, nós aprendemos sobre
-              <em>funções</em>:
-            </p>
-            <p class='fragment' data-fragment-index='0'>
-              De forma semelhante, Python também possui o conceito de
-              <strong>funções</strong>:
-            </p>
-          </div>
-          <div style='display: flex; gap: 1ex; margin-top: 1ex;'>
-            <div
-              style='
-                display: flex;
-                flex-flow: column;
-                gap: 2ex;
-                text-align: left;
-                font-size: .9em;
-                background-color: #fff;
-                color: #555;
-                padding: 1ex;
-              '
-            >
-              <div>
-                Definição de <span class='local-math-font'>f</span>:
-                &nbsp;<span class='local-math-font'>f(x) = x²</span>
-              </div>
-              <div style='font-size: .8em;'>
-                Função <span class='local-math-font'>f</span> aplicada:
-                <div class='local-math-font'>
-                  f(0) = 0<br/>
-                  f(1) = 1<br/>
-                  f(3.14) = 9.8596<br/>
-                  f(-12) = 144
-                </div>
-              </div>
-            </div>
-            <div class='fragment' style='flex: 1' data-fragment-index='0'>
-              <div class='python-repl'><!--
-                >>> def f(x):
-                ...     return x**2
-                ... 
-                >>> f(0)
-                0
-                >>> f(1)
-                1
-                >>> f(3.14)
-                9.8596
-                >>> f(-12)
-                144
-              --></div>
-            </div>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>
-            Uma <strong>função</strong> pode ser vista como um "mini-programa"
-            que é executado toda vez que ela é <strong>chamada</strong>
-          </p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p style='font-size: .8em'>
-            Por exemplo, vamos definir uma função para calcular o Índice de
-            Massa Corporal:
-          </p>
-          <div class='ace-brython fragment' data-readonly data-components='code'>
-            <script type='text/x.ace-brython' data-id='imc-def'>
-              def imc(massa, altura):
-                  return massa / altura**2
-            </script>
-          </div>
-
-          <div style='text-align: left; font-size: .7em;'>
-            <ul>
-              <li class='fragment'>
-                A palavra-chave <code>def</code> indica que estamos definindo
-                uma nova função
-              </li>
-              <li class='fragment'>
-                O <strong>nome</strong> de nossa função é <code>imc</code>
-              </li>
-              <li class='fragment'>
-                Nossa função possui dois <strong>parâmetros</strong>,
-                <code>massa</code> e <code>altura</code>, que são utilizados
-                como variáveis dentro do seu corpo
-              </li>
-              <li class='fragment'>
-                O <strong>corpo</strong> de nossa função é formado pelas
-                instruções que a função executará
-                <ul>
-                  <li>
-                    Neste exemplo, temos apenas a instrução
-                    <code>return massa / altura**2</code>, que define o
-                    <strong>valor de retorno</strong> da função
-                  </li>
-                  <li>
-                    Note que há um nível de <strong>indentação</strong>
-                    (espaços à esquerda) requerido no corpo da função
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p style='font-size: .8em'>
-            Agora podemos utilizar nossa função:
-          </p>
-          <div class='ace-brython fragment' style='height: 5em;' data-readonly>
-            <script type='text/x.ace-brython' data-parent='imc-def'>
-              imc_gustavo = imc(60, 1.63)
-              print('O IMC de Gustavo é ' + str(imc_gustavo))
-            </script>
-          </div>
-          <div style='text-align: left; font-size: .7em;'>
-            <ul>
-              <li class='fragment'>
-                Na linha 1, estamos <strong>chamando</strong> (ou
-                <strong>invocando</strong>) a função <code>imc</code>
-              </li>
-              <li class='fragment'>
-                Os valores <code>60</code> e <code>1.63</code> são os
-                <strong>argumentos</strong> desta chamada. Esses argumentos são
-                respectivamente atribuídos aos parâmetros <code>massa</code> e
-                <code>altura</code> da função
-              </li>
-              <li class='fragment'>
-                Esta chamada faz com que as instruções do corpo da função sejam
-                executadas.
-              </li>
-              <li class='fragment'>
-                Quando a execução da função é executada, seu valor de retorno
-                será o resultado da chamada.
-              </li>
-            </ul>
-        </section>
-
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <div class='ace-brython' style='height: 12em;'>
-            <script type='text/x.ace-brython' data-parent='imc-def'>
-              def imc(massa, altura):
-                  return massa / altura**2
-
-
-              print('O IMC de Gustavo é ' + str(imc(60, 1.63)))
-              print('O IMC de Juvenal é ' + str(imc(98, 1.90)))
-              print('O IMC de Antônia é ' + str(imc(54, 1.65)))
-            </script>
-          </div>
-          <div style='text-align: left; font-size: .8em; margin-top: 1ex;'>
-            Principais benefícios do uso de funções:
-            <ul>
-              <li>
-                <strong>Reutilização de lógica/código</strong>
-              </li>
-              <li>
-                Código fonte fica mais fácil de ler
-              </li>
-              <li>
-                Facilita a manutenção do código
-              </li>
-            </ul>
-          </div>
-          <div class='local-standout-box fragment' style='top: 4em'>
-            Isso se torna mais aparente quando escrevemos códigos mais
-            complexos
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>Funções não precisam necessariamente retornar um valor:</p>
-          <div class='ace-brython'>
-            <script type='text/x.ace-brython'>
-              def say_hello(name):
-                  print('Hello ' + name)
-                  print('Goodbye ' + name)
-
-              say_hello('Alice')
-              say_hello('Bob')
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>E também não precisam obrigatoriamente definir parâmetros:</p>
-          <div class='ace-brython'>
-            <script type='text/x.ace-brython'>
-              def say_hello():
-                  print('Hello stranger')
-                  print('Goodbye stranger')
-
-              say_hello()
-              say_hello()
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>Os parâmetros podem ser definidos com valores padrões:</p>
-          <div class='ace-brython'>
-            <script type='text/x.ace-brython'>
-              def say_hello(name='stranger'):
-                  print('Hello ' + name)
-                  print('Goodbye ' + name)
-
-              say_hello('Alice')
-              say_hello()
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>É possível passar argumentos através da sintaxe de
-          <strong>palavras-chave</strong>:</p>
-          <div class='ace-brython' style='font-size: .58em'>
-            <script type='text/x.ace-brython'>
-              def say_hello(name, age):
-                  print('Hello ' + name)
-                  print('Hopefully, in one year you will be ' + str(age + 1))
-
-              say_hello('Alice', 27)
-              say_hello(name='Bob', age=25)
-              say_hello(age=90, name='Ricardo')
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p style='font-size: .9em;'>Uma função pode chamar outras funções em
-          seu corpo:</p>
-          <div class='ace-brython' style='font-size: .5em'>
-            <script type='text/x.ace-brython'>
-              def tell_future(age):
-                  print('If you don\'t die, in one year you will be ' + str(age + 1))
-
-              def say_hello(name, age):
-                  print('Hello ' + name)
-                  tell_future(age)
-                  print('Goodbye ' + name)
-
-              say_hello('Alice', 27)
-              say_hello(name='Bob', age=25)
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>É possível utilizar variáveis dentro das funções:</p>
-          <div class='ace-brython' style='font-size: .5em'>
-            <script type='text/x.ace-brython'>
-              def tell_future(age):
-                  next_age = age + 1
-                  print('If you don\'t die, in one year you will be ' + str(next_age))
-
-              def say_hello(name, age):
-                  print('Hello ' + name)
-                  tell_future(age)
-                  print('Goodbye ' + name)
-
-              say_hello('Alice', 27)
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p style='font-size: .7em;'>Note que a variável <code>next_age</code>
-          é acessível apenas <strong>dentro</strong> da função onde ela foi
-          criada:</p>
-          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
-            <script type='text/x.ace-brython'>
-              def tell_future(age):
-                  next_age = age + 1
-                  print('If you don\'t die, in one year you will be ' + str(next_age))
-
-              def say_hello(name, age):
-                  print('Hello ' + name)
-                  tell_future(age)
-                  print('Goodbye ' + name)
-
-              say_hello('Alice', 27)
-
-              print(next_age) # Essa linha vai FALHAR!
-            </script>
-          </div>
-          <div class='local-standout-box fragment' style='font-size: .8em; bottom: 2em;'>
-            Nós dizemos que <code>next_age</code> é uma <strong>variável
-            local</strong> da função <code>tell_future</code>, e a mesma é
-            <strong>descartada</strong> quando a função retorna.
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>Mas é okay uma função acessar uma variável
-          <strong>global</strong>:</p>
-          <div class='ace-brython' style='font-size: .5em;'>
-            <script type='text/x.ace-brython'>
-              PI = 3.1416 # PI é uma variável global
-
-              def area_circulo(raio):
-                  return PI * raio**2
-
-              print('A área de um círculo de raio 3 é ' + str(area_circulo(3)))
-            </script>
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p>Variáveis locais "escondem" variáveis globais:</p>
-          <div class='ace-brython' style='font-size: .5em;'>
-            <script type='text/x.ace-brython'>
-              ultima_compra = 'gravata'
-
-              def nova_compra(produto, preco):
-                  print('Nova compra: ' + produto)
-                  print('Valor da compra: ' + str(preco))
-                  ultima_compra = produto
-
-              nova_compra('camiseta', 48)
-              nova_compra('sapato', 80)
-              print('A última compra realizada foi: ' + ultima_compra)
-            </script>
-          </div>
-          <div class='local-standout-box fragment' style='font-size: .7em;'>
-            Com a atribuição <code>ultima_compra = produto</code>, Python
-            entende que está sendo criada uma nova variável local chamada
-            <code>ultima_compra</code>, que existe apenas no
-            <strong>escopo</strong> da função <code>nova_compra</code>.
-          </div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Funções</h3>
-          <p style='font-size: .7em'>Quer dizer... Funções até conseguem
-          alterar variáveis globais, mas para isso é necessário o uso da
-          palavra-chave <code>global</code>:</p>
-          <div class='ace-brython' style='font-size: .5em;'>
-            <script type='text/x.ace-brython'>
-              ultima_compra = 'gravata'
-
-              def nova_compra(produto, preco):
-                  global ultima_compra
-                  print('Nova compra: ' + produto)
-                  print('Valor da compra: ' + str(preco))
-                  ultima_compra = produto
-
-              nova_compra('camiseta', 48)
-              nova_compra('sapato', 80)
-              print('A última compra realizada foi: ' + ultima_compra)
-            </script>
-          </div>
-          <div class='local-standout-box fragment' style='font-size: .7em; bottom: 2em;'>
-            Entretanto, esta prática é geralmente
-            <strong>desencorajada</strong> - são poucos os casos onde desejamos
-            que funções tenham efeitos colaterais em variáveis globais.
-          </div>
-        </section>
-
-
-
-        <section>
-          <p style='font-size: .55em'>Python já vem com diversas funções
-          <em>built-in</em> (pré-definidas) para nossa conveniência:</p>
-          <div class='python-repl' style='font-size: .45em;'><!--
-          >>> abs(-9) # Valor absoluto de um número
-          9
-          >>> divmod(10, 3) # Quociente e o resto da divisão de 10 por 3
-          (3, 1)
-          >>> float("5.62") # Conversão para float
-          5.62
-          >>> input('Digite seu nome: ') # Leitura de entrada do usuário
-          Digite seu nome: Meu nome é Alice
-          'Meu nome é Alice'
-          >>> int(3.14) # Conversão para inteiro
-          3
-          >>> len('Python') # Tamanho de um objeto
-          6
-          >>> max(5, 8, -1) # Valor máximo de um conjunto de números
-          8
-          >>> min(5, 8, -1) # Valor mínimo de um conjunto de números
-          -1
-          >>> print("Olá Mundo") # Imprimir algo na tela
-          Olá Mundo
-          >>> round(45.678703, 3) # Arredondar um número
-          45.679
-          --></div>
-          <div style='font-size: .45em'>
-            Lista completa em
-            <a href="https://docs.python.org/3/library/functions.html" target='_blank'>
-              https://docs.python.org/3/library/functions.html</a>
-          </div>
-        </section>
-
-
-
-        <section>
-          <p>Vamos alterar o programa da Alice para utilizar funções!</p>
-        </section>
-
-
-
-        <section>
-            <div style='
-                height: var(--slide-height);
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                z-index: 0;
-                '
-            >
-                <h4 style='flex: none; font-style: italic;'>Relembrando...</h4>
-                <div class='ace-brython'
-                     style='
-                        font-size: .5em;
-                        flex: 1;
-                        margin-bottom: 2em;
-                     '
-                     data-min-lines='15'
-                     data-max-lines='20'
-                >
-                    <script type='text/x.ace-brython' data-id='using-vars'>
-                        # Hambúrguer por convidado: 1.5
-                        # Receita
-                        #   Carne Magra: 120g
-                        #   Carne Gorda:  80g
-                        #        Queijo:  22g
-                        #         Bacon:  20g
-                        #         Tomate: 30g (2 rodelas)
-
-                        convidados = 42
-                        num_hamburgueres = convidados * 1.5
-
-                        print('Olá, Alice!')
-                        print('Você precisará fazer ' + str(num_hamburgueres) + ' hambúrgueres, certo?')
-                        print('Para isso, você precisará comprar:')
-                        print(str(num_hamburgueres * 120 / 1000) + ' kg de carne moída magra')
-                        print(str(num_hamburgueres * 80 / 1000) + ' kg de carne moída gorda')
-                        print(str(num_hamburgueres * 22 / 1000) + ' kg de queijo')
-                        print(str(num_hamburgueres * 20 / 1000) + ' kg de bacon')
-
-                        # Vamos considerar que apenas 85% do tomate possa
-                        # ser aproveitado para fazer as rodelas
-                        print(str(num_hamburgueres * 30 / 0.85 / 1000) + ' kg de tomate')
-                    </script>
-                </div>
-            </div>
-            <div class='fragment local-standout-box fade-in-then-out' style='bottom: 2em; z-index: 1;'>
-              Primeira coisa que podemos pensar em fazer é arredondar as
-              medidas. Mas talvez seja melhor criar uma função responsável por
-              calcular as medidas primeiro.
-            </div>
-        </section>
-
-
-
-        <section>
-            <div style='
-                height: var(--slide-height);
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                z-index: 0;
-                overflow: auto;
-                '
-            >
-              <h4 style='flex: none; font-size: .8em;'>Criando a função
-              <code>calc_medida()</code></h4>
-                <div class='ace-brython'
-                     style='
-                        font-size: .5em;
-                        flex: 1;
-                        margin-bottom: 2em;
-                     '
-                     data-min-lines='15'
-                     data-max-lines='20'
-                     data-prev='using-vars'
-                >
-                    <script type='text/x.ace-brython' data-id='implement-calc_medida'>
-                        # Hambúrguer por convidado: 1.5
-                        # Receita
-                        #   Carne Magra: 120g
-                        #   Carne Gorda:  80g
-                        #        Queijo:  22g
-                        #         Bacon:  20g
-                        #         Tomate: 30g (2 rodelas)
-
-                        def calc_medida(gramas_por_unidade):
-                            medida = num_hamburgueres * gramas_por_unidade
-                            # Converter para kg
-                            return medida / 1000
-
-                        convidados = 42
-                        num_hamburgueres = convidados * 1.5
-
-                        print('Olá, Alice!')
-                        print('Você precisará fazer ' + str(num_hamburgueres) + ' hambúrgueres, certo?')
-                        print('Para isso, você precisará comprar:')
-                        print(str(calc_medida(120)) + ' kg de carne moída magra')
-                        print(str(calc_medida(80)) + ' kg de carne moída gorda')
-                        print(str(calc_medida(22)) + ' kg de queijo')
-                        print(str(calc_medida(20)) + ' kg de bacon')
-
-                        # Vamos considerar que apenas 85% do tomate possa
-                        # ser aproveitado para fazer as rodelas
-                        print(str(calc_medida(30) / 0.85) + ' kg de tomate')
-                    </script>
-                </div>
-            </div>
-            <div class='fragment local-standout-box fade-in-then-out' style='bottom: 2em; z-index: 1;'>
-              Agora nosso código está mais fácil de ser modificado: basta
-              alterar o conteúdo da função <code>calc_medida()</code>!
-            </div>
-        </section>
-
-
-
-        <section>
-            <div style='
-                height: var(--slide-height);
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                z-index: 0;
-                overflow: auto;
-                '
-            >
-              <h4 style='flex: none; font-size: .8em;'>Arredondando as medidas...</h4>
-                <div class='ace-brython'
-                     style='
-                        font-size: .5em;
-                        flex: 1;
-                        margin-bottom: 2em;
-                     '
-                     data-min-lines='15'
-                     data-max-lines='20'
-                     data-prev='implement-calc_medida'
-                >
-                    <script type='text/x.ace-brython' data-id='add-fator_aproveitamento'>
-                        # Hambúrguer por convidado: 1.5
-                        # Receita
-                        #   Carne Magra: 120g
-                        #   Carne Gorda:  80g
-                        #        Queijo:  22g
-                        #         Bacon:  20g
-                        #         Tomate: 30g (2 rodelas)
-
-                        def calc_medida(gramas_por_unidade):
-                            medida = num_hamburgueres * gramas_por_unidade
-                            # Converter para kg
-                            medida = medida / 1000
-                            # Arredondar para que esteja na escala de 100 gramas
-                            medida = round(medida, 1)
-                            return medida
-
-                        convidados = 42
-                        num_hamburgueres = convidados * 1.5
-
-                        print('Olá, Alice!')
-                        print('Você precisará fazer ' + str(num_hamburgueres) + ' hambúrgueres, certo?')
-                        print('Para isso, você precisará comprar:')
-                        print(str(calc_medida(120)) + ' kg de carne moída magra')
-                        print(str(calc_medida(80)) + ' kg de carne moída gorda')
-                        print(str(calc_medida(22)) + ' kg de queijo')
-                        print(str(calc_medida(20)) + ' kg de bacon')
-
-                        # Vamos considerar que apenas 85% do tomate possa
-                        # ser aproveitado para fazer as rodelas
-                        print(str(calc_medida(30) / 0.85) + ' kg de tomate')
-                    </script>
-                </div>
-            </div>
-            <div class='fragment local-standout-box fade-in-then-out' style='top: 3em; z-index: 1; font-size: .8em;'>
-              Mas ainda temos um problema: a quantidade de tomate ainda está
-              com valores quebrados... Vamos adicionar mais um parâmetro para
-              nossa função!
-            </div>
-        </section>
-
-
-
-        <section>
-            <div style='
-                height: var(--slide-height);
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                z-index: 0;
-                overflow: auto;
-                '
-            >
-              <h4 style='flex: none; font-size: .8em;'>Adicionando o parâmetro
-              <code>fator_aproveitamento</code>...</h4>
-                <div class='ace-brython'
-                     style='
-                        font-size: .5em;
-                        flex: 1;
-                        margin-bottom: 2em;
-                     '
-                     data-min-lines='15'
-                     data-max-lines='20'
-                     data-prev='add-fator_aproveitamento'
-                >
-                    <script type='text/x.ace-brython'>
-                        # Hambúrguer por convidado: 1.5
-                        # Receita
-                        #   Carne Magra: 120g
-                        #   Carne Gorda:  80g
-                        #        Queijo:  22g
-                        #         Bacon:  20g
-                        #         Tomate: 30g (2 rodelas)
-
-                        def calc_medida(gramas_por_unidade, fator_aproveitamento=1):
-                            medida = num_hamburgueres * gramas_por_unidade
-                            # Note o operator /=
-                            medida /= fator_aproveitamento
-                            # Converter para kg
-                            medida = medida / 1000
-                            # Arredondar para que esteja na escala de 100 gramas
-                            medida = round(medida, 1)
-                            return medida
-
-                        convidados = 42
-                        num_hamburgueres = convidados * 1.5
-
-                        print('Olá, Alice!')
-                        print('Você precisará fazer ' + str(num_hamburgueres) + ' hambúrgueres, certo?')
-                        print('Para isso, você precisará comprar:')
-                        print(str(calc_medida(120)) + ' kg de carne moída magra')
-                        print(str(calc_medida(80)) + ' kg de carne moída gorda')
-                        print(str(calc_medida(22)) + ' kg de queijo')
-                        print(str(calc_medida(20)) + ' kg de bacon')
-
-                        # Vamos considerar que apenas 85% do tomate possa
-                        # ser aproveitado para fazer as rodelas
-                        print(str(calc_medida(30, 0.85)) + ' kg de tomate')
-                    </script>
-                </div>
-            </div>
-        </section>
-
-
-
         <section data-auto-animate>
           <h3>Controle de fluxo e valores booleanos</h3>
           <p style='font-style: italic;'>
             A vida é feita de decisões...
+          </p>
+          <p class='fragment' style='font-style: italic; font-size: .4em;'>
+            (e eu sempre escolho a pior)
           </p>
         </section>
 
@@ -844,7 +150,7 @@
                   print('Seu índice de massa corporal é: ' + str(round(valor_imc, 3)))
 
                   if valor_imc >= 25:
-                    print('Você está acima do peso ideal')
+                    print('Você está acima do "peso ideal"')
 
                   print('Tchau, ' + name)
 
@@ -924,10 +230,10 @@
                   print('Seu índice de massa corporal é: ' + str(round(valor_imc, 3)))
 
                   if valor_imc >= 25:
-                    print('Você está acima do peso ideal')
+                    print('Você está acima do "peso ideal"')
                   else:
-                    print('Você não está acima do peso ideal')
-                    print('Continue se cuidando!')
+                    print('Você não está acima do "peso ideal"')
+                    print('Porém deve se cuidar mesmo assim!')
 
                   print('Tchau, ' + name)
 
@@ -945,7 +251,7 @@
           </div>
           <div class='fragment local-standout-box' style='bottom: 2em;'>
             Hm... Mas também há os casos de pessoas que ficam
-            <strong>abaixo</strong> do peso ideal. 🤔
+            <strong>abaixo</strong> do "peso ideal". 🤔
           </div>
         </section>
 
@@ -986,11 +292,11 @@
                   print('Seu índice de massa corporal é: ' + str(round(valor_imc, 3)))
 
                   if valor_imc >= 25:
-                    print('Você está acima do peso ideal')
+                    print('Você está acima do "peso ideal"')
                   elif valor_imc >= 18.5:
-                    print('Parabéns! Vocês está dentro da faixa ideal!')
+                    print('Você está dentro da "faixa ideal"!')
                   else:
-                    print('Você está abaixo do peso ideal')
+                    print('Você está abaixo do "peso ideal"')
 
                   print('Tchau, ' + name)
 
@@ -1032,13 +338,13 @@
                   print('Seu índice de massa corporal é: ' + str(round(valor_imc, 3)))
 
                   if valor_imc < 17:
-                    print('Você está muito abaixo do peso ideal!')
+                    print('Você está muito abaixo do "peso ideal"!')
                   elif valor_imc < 18.5:
-                    print('Você está abaixo do peso ideal')
+                    print('Você está abaixo do "peso ideal"')
                   elif valor_imc < 25:
-                    print('Parabéns! Você está dentro da faixa ideal')
+                    print('Você está dentro da "faixa ideal"')
                   elif valor_imc < 30:
-                    print('Você está acima do peso ideal')
+                    print('Você está acima do "peso ideal"')
                   elif valor_imc < 35:
                     print('Você está com obesidade')
                   elif valor_imc < 40:
@@ -1146,7 +452,7 @@
 
 
         <section data-auto-animate>
-          <div class='ace-brython' data-readonly data-components='code' style='z-index: 0;font-size: .4em;flex: 1;margin-bottom: 2em;'
+          <div class='ace-brython' style='z-index: 0;font-size: .4em;flex: 1;margin-bottom: 2em;'
           >
             <script type='text/x.ace-brython'>
               cor = 'vermelho'
@@ -1199,11 +505,816 @@
         </section>
 
 
+        <section data-auto-animate>
+          <h3>As condições do <code>if</code></h3>
+        </section>
+
+        <section data-auto-animate>
+          <h3>As condições do <code>if</code></h3>
+          <p style='font-size: .8em;'>Como vimos, a instrução <code>if</code>
+          sempre requer uma <strong>condição</strong>, que é escrita em forma
+          de expressão:</p>
+
+          <div
+              data-id='if-syntax'
+              style='
+                font-size: .8em;
+                margin-top: 1em;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+              '
+          >
+            <code>if <strong>{condicao}</strong>:</code>
+          </div>
+
+          <p class='fragment' style='font-size: .8em; margin-top: 2em;'>
+            Adivinhe o tipo resultante dessa expressão...
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <div
+              data-id='if-syntax'
+              style='
+                font-size: .8em;
+                margin-top: 1em;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+              '
+          >
+            <code>if <strong>{condicao}</strong>:</code>
+          </div>
+
+          <p style='font-size: 1em; margin-top: 2em;'>
+            Isso mesmo! O valor resultante dessa expressão é um
+            <code>bool</code>
+          </p>
+          <p class='fragment' style='font-size: .8em; margin-top: 2em;'>
+            (Mesmo se a expressão não for originalmente um valor booleano,
+            Python faz a "conversão" no momento de verificar a condição)
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Valores booleanos</h3>
+          <p style='font-style: italic;'>É 8 ou 80...</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Valores booleanos</h3>
+          <p>Valores booleanos admitem apenas dois possíveis valores:</p>
+          <div class='python-repl'><!--
+          >>> True
+          True
+          >>> False
+          False
+          --></div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Expressões booleanas</h3>
+
+          <p>Python possui diversos operadores de <strong>comparação</strong></p>
+
+          <p>Os resultados das comparações são do tipo <code>bool</code></p>
+          <div class='python-repl'><!--
+          >>> imc(120, 1.9) < 30
+          False
+          >>> len('Cabeleireira Leila') == 18
+          True
+          >>> 2 >= 1
+          True
+          --></div>
+        </section>
+
+
+        <section data-auto-animate data-reusable>
+          <h3>Expressões booleanas</h3>
+
+          <div style='font-size: .8em; text-align: left; margin-bottom: 1ex;' data-reusable-tag='title'>
+            <code>==</code> → Igualdade
+            <br/>
+            <code>!=</code> → Diferença
+          </div>
+
+          <div data-reusable-tag='code'>
+            <div class='python-repl'><!--
+            >>> 3 == 8
+            False
+            >>> 81 == 9**2
+            True
+            >>> 'Dracula' == 'Edward'
+            False
+            >>> 1 != 1.0
+            False
+            >>> 450 != '450'
+            True
+            --></div>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <h3>Expressões booleanas</h3>
+
+          <p>Note que <code>==</code> e <code>=</code> possuem
+          <strong>significados diferentes</strong>:</p>
+
+          <div class='python-repl'><!--
+          >>> x = 98
+          >>> x = x + 1  # Incrementando o valor de x
+          >>> x
+          99
+          --></div>
+
+          <br />
+
+          <div class='python-repl'><!--
+          >>> x = 98
+          >>> x == x + 1  # Comparando 98 com 99
+          False
+          >>> x
+          98
+          --></div>
+        </section>
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            <code>&lt;</code>
+            <code>&lt;=</code>
+            <code>&gt;</code>
+            <code>&gt;=</code>
+            → Desigualdades
+          </template>
+
+          <template data-tag='code'>
+            <div class='python-repl'><!--
+            >>> abs(-2) >= 1
+            True
+            >>> 10 >= 10
+            True
+            >>> 10 > 10
+            False
+            >>> 87 ** .5 < 9
+            False
+            >>> 80 ** .5 < 9
+            True
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            <code>and</code>
+            <code>or</code>
+            → Operadores binários booleanos
+          </template>
+
+          <template data-tag='code'>
+            <div class='python-repl'><!--
+            >>> abs(-2) >= 1 and 'Alice' + 'Robert' == 'Love'
+            False
+            >>> abs(-2) >= 1 or 'Alice' + 'Robert' == 'Love'
+            True
+            --></div>
+
+            <div class='python-repl' style='margin-top: 1em;'><!--
+            >>> False and print('hello') # Early stop
+            False
+            >>> True or print('hello') # Early stop
+            True
+            >>> True and print('hello') # Agora print é executado
+            hello
+            >>> False or print('hello') # Agora print é executado
+            hello
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            <code>not</code>
+            → Operador de negação
+          </template>
+
+          <template data-tag='code'>
+            <div class='python-repl'><!--
+            >>> not len('Alice') > 5
+            True
+            >>> not True
+            False
+            >>> not not True  # Dupla negação
+            True
+            --></div>
+          </template>
+        </template>
+
+
+
+        <section data-auto-animate>
+          <h3>Valores "Truthy" e "Falsey"</h3>
+
+          <p>
+          A função <code>bool()</code> converte valores para o tipo
+          <code>bool</code>.
+          </p>
+
+          <div class='python-repl'><!--
+          >>> bool(0)  # Zero é falsey
+          False
+          >>> bool(0.1)  # Qualquer número diferente de zero é truthy
+          True
+          >>> bool(45)
+          True
+          >>> bool("")  # A string vazia
+          False
+          >>> bool("uma string não vazia")
+          True
+          >>> bool("  ")  # Uma string com espaços em brancos não é vazia
+          True
+          --></div>
+
+        </section>
+
+        <section data-auto-animate>
+          <h3>Valores "Truthy" e "Falsey"</h3>
+
+          <p>Esta conversão é implicitamente realizada por Python em lugares
+          onde se espera um <code>bool</code>:</p>
+
+          <div class='ace-brython' style='font-size: .5em;'>
+            <script type='text/x.ace-brython'>
+              nome = 'Bilbo'
+              sobrenome = ''
+
+              if nome:
+                  print('Olá, ' + nome)
+
+                  if sobrenome:
+                      print('Já sei tudo sobre você, ' + nome + ' ' + sobrenome)
+                  else:
+                      print('Qual é seu sobrenome?')
+
+              else:
+                  print('Olá, desconhecido')
+                  print('Qual é o seu nome?')
+            </script>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <h3>Expressões Booleanas</h3>
+
+          <p style='font-size: .7em'> Os operadores booleanos nos ajudam a
+          escrever condições mais expressivas.</p>
+
+          <p class='fragment' style='font-size: .7em'> Exemplo: vamos escrever
+          um programa que diz se um dado ano é bissexto ou não.</p>
+
+
+          <div class='fragment'>
+            <div style='display: flex; flex-direction: column;'>
+              <div style='flex: 1'>
+                <p style='font-size: .7em;'>Sem operadores booleanos: </p>
+                <div
+                  class='ace-brython' style='font-size: .5em;'
+                  data-readonly
+                  data-components='code'
+                >
+                  <script type='text/x.ace-brython'>
+                    def ano_eh_bissexto(ano):
+                        if ano % 400 == 0:
+                          return True
+                        elif ano % 4 == 0:
+                          if ano % 100 != 0:
+                            return True
+                        return False
+                  </script>
+                </div>
+              </div>
+
+              <div class='fragment' style='flex: 1'>
+                <p style='font-size: .7em;'>Com operadores booleanos: </p>
+                <div
+                  class='ace-brython' style='font-size: .5em;'
+                  data-readonly
+                  data-components='code'
+                >
+                  <script type='text/x.ace-brython'>
+                    def ano_eh_bissexto(ano):
+                        if ano % 400 == 0 or (ano % 4 == 0 and ano % 100 != 0):
+                          return True
+                        return False
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>A instrução <code>if</code> não é a única que utiliza expressões
+          booleanas como condição!</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>Vamos aprender agora sobre <strong>laços de repetição</strong></p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Laços de Repetição</h3>
+
+          <p>É <strong>muito comum</strong> (<em>muito mesmo</em>) programas de
+          computadores executarem um mesmo conjunto de instrução
+          <strong>repetidamente</strong> até que uma <strong>condição</strong>
+          seja satisfeita.</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Laços de Repetição</h3>
+
+          <p>Um exemplo que já conhecemos:</p>
+          <div class='fragment'
+            data-fragment-index='0'
+            style='display: flex; justify-content: center;'>
+              <div style='flex: none'>
+                  <img
+                      src='images/stickman-worship.png'
+                      style='height: 6em; vertical-align: bottom; margin-top: 3em;'
+                  />
+                  <img
+                      src='images/python-logo-3d.png'
+                      style='
+                          vertical-align: top;
+                          height: 7.5em;
+                          margin-top: 0;
+                          animation: local-glowing 3s infinite ease-in-out;
+                          '
+                  />
+              </div>
+          </div>
+          <p class='fragment' data-fragment-index='0'>A interface REPL do Python</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>A interface REPL do Python</p>
+          <img
+              src='images/python-logo-3d.png'
+              style='
+                  vertical-align: middle;
+                  height: 4em;
+                  animation: local-glowing 3s infinite ease-in-out;
+                  margin-right: 2em;
+                  '
+          />
+          <img
+              src='images/repl-flowchar.svg'
+              style='height: 10em; vertical-align: middle;'
+          />
+          <p style='font-size: .7em'>Estratégia: ler e executar comandos até
+          que o usuário requisite a saída do shell</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+          <p style='font-size: .8em'>Vamos fingir que não conhecemos a fórmula
+          fechada da soma de uma PA...</p>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+          <p style='font-size: .8em'>Vamos escrever uma função responsável por
+          somar os primeiros <code>n</code> números naturais:</p>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+          <p style='font-size: .8em'>Vamos escrever uma função responsável por
+          somar os primeiros <code>n</code> números naturais:</p>
+
+          <img src='images/soma-flowchart.svg' />
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+          <p style='font-size: .8em'>Vamos escrever uma função responsável por
+          somar os primeiros <code>n</code> números naturais:</p>
+
+          <div class='ace-brython' style='font-size: .5em; height: 14em;'>
+            <script type='text/x.ace-brython' data-id='first-loop-while'>
+              def soma_n(n):
+                  i = 0
+                  soma = 0
+
+                  while i < n:
+                      soma += i
+                      i += 1
+
+                  return soma
+
+
+              print(soma_n(10))
+              print(soma_n(4))
+            </script>
+          </div>
+
+         <div class='fragment local-standout-box'><code>while</code> é uma das
+            duas estruturas de repetição de Python. A outra é <code>for</code>.
+          </div>
+        </section>
+
+<section data-auto-animate>
+          <p>Nosso primeiro laço</p>
+          <p style='font-size: .8em'>O mesmo programa utilizando
+          <code>for</code>:</p>
+
+          <div class='fragment'>
+            <div
+              class='ace-brython'
+              style='font-size: .5em; height: 14em;'
+              data-prev='first-loop-while'
+              >
+              <script type='text/x.ace-brython'>
+                def soma_n(n):
+                    soma = 0
+                    for i in range(0, n):
+                      soma += i
+
+                    return soma
+
+
+                print(soma_n(10))
+                print(soma_n(4))
+              </script>
+            </div>
+
+            <div style='font-size: .8em; text-align: left;'>
+              <ul>
+                <li>
+                  A chamada de função <code>range(0, n)</code> retorna um
+                  <strong>iterável</strong> que produz números de
+                  <span class='math-font'>0</span> a
+                  <span class='math-font'>n - 1</span>
+                </li>
+                <li>
+                  Valores do tipo <strong>iterável</strong> representam objetos
+                  que permitem ser usados com a instrução <code>for</code>,
+                  iterando sobre seus itens
+                </li>
+              </ul>
+            </div>
+            <div class='fragment local-standout-box' style='bottom: 1.5em;'>
+              Exemplos de objetos iteráveis são as coleções, que veremos mais
+              adiante.
+            </div>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Por que temos duas estruturas diferentes para laços?</p>
+
+          <p class='fragment'><code>for</code> é bem conveniente quanto estamos
+          utilizando coleções e/ou já se sabe de antemão a quantidade de
+          repetições</p>
+
+
+          <p class='fragment'><code>while</code> acaba sendo necessário quando
+          não se sabe quantas vezes o bloco de instruções deve ser repetido</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Exemplo: vamos implementar um jogo onde o usuário precisa descobrir
+            um número que está entre 1 e 100.
+          </p>
+          <br/>
+          <p class='fragment'>
+            Estratégia: repetidamente ler um palpite do usuário até ele
+            acertar.
+          </p>
+          <div class='fragment local-standout-box'>
+            Neste caso, não tem como saber quantas vezes vamos repetir, então
+            precisaremos utilizar a estrutura <code>while</code>!
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>Nossa solução:</p>
+          <div class='ace-brython' data-components='code'>
+            <script type='text/x.ace-brython'>
+              import random
+
+              numero_secreto = random.randint(1, 100)
+              palpite = int(input('Qual seu palpite? '))
+
+              while palpite != numero_secreto:
+                  if palpite > numero_secreto:
+                    print('Número secreto é menor que o palpite')
+                  else:
+                    print('Número secreto é maior que o palpite')
+
+                  palpite = int(input('Qual seu novo palpite? '))
+
+              print('Parabéns, você acertou!')
+            </script>
+          </div>
+          <div class='local-standout-box fragment' style='bottom: 1em; font-size: .9em;'>
+            Desafio: você conseguiria implementar o contrário: um programa que
+            tenta descobrir um número selecionado pelo usuário com poucos
+            palpites?
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>break</code></h4>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>break</code></h4>
+          <p>
+            Muitas vezes é comum querermos sair imediatamente de um
+            laço caso alguma condição seja satisfeita, ignorando o
+            restante das linhas presentes no bloco.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>break</code></h4>
+          <p>
+            Muitas vezes é comum querermos sair imediatamente de um
+            laço caso alguma condição seja satisfeita, ignorando o
+            restante das linhas presentes no bloco.
+          </p>
+          <p>
+            Chamamos isto de <strong>quebrar</strong> o laço e utilizamos a
+            instrução <code>break</code> para fazê-lo.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>break</code></h4>
+          <p>
+            Um exemplo de quebrando um <code>while</code>:
+            <br/>
+            <em>Um programa papagaio</em>: programa que repete cada entrada do
+            usuário até que o mesmo diga "tchau".
+          </p>
+
+          <div class='ace-brython fragment' data-components='code'
+               style='font-size: .6em; flex: 1;'
+          >
+            <script type='text/x.ace-brython'>
+              print('Conversa com papagaio')
+
+              while True:
+                frase = input('Usuário: ')
+
+                if frase == 'tchau':
+                  break
+                  print('Esta linha de código nunca será executada!')
+
+                print('Papagaio:', frase)
+
+              print('Fim')
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>continue</code></h4>
+          <p>
+            Assim como o <code>break</code>, a instrução <code>continue</code>
+            também para a execução do bloco.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>continue</code></h4>
+          <p>
+            Assim como o <code>break</code>, a instrução <code>continue</code>
+            também para a execução do bloco.
+          </p>
+          <p>
+            Porém, em vez de sair do laço, a instrução move o fluxo do programa
+            para a <strong>próxima iteração</strong>.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Instrução <code>continue</code></h4>
+          <p style='font-size: .8em;'>
+            Exemplo com um <code>while</code>: Um programa para pedir a senha
+            do usuário até ele acertar.
+          </p>
+          <div class='ace-brython fragment' data-components='code'
+               style='font-size: .5em; flex: 1;'
+          >
+            <script type='text/x.ace-brython'>
+              # Exemplo que só executa o bloco inteiro quando a senha não
+              # está vazia e está correta
+              print('Digite seu nome')
+              nome = input()
+              print('Olá,' + nome + '!')
+
+              while True:
+                  senha = input('Por favor, digite a senha: ')
+
+                  if not senha:
+                    print('Senha vazia')
+                    continue
+
+                  if senha != '1234':
+                    print('Senha incorreta!')
+                    continue
+
+                  break
+
+              print('Senha correta, login efetuado com sucesso!')
+              print('Até a próxima!')
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>Note que <code>break</code> e
+          <code>continue</code> também podem ser utilizados em laços do tipo
+          <code>for</code>.</p>
+
+          <p class='fragment'>Exemplo: permitir no máximo 5 tentativas de
+          login.</p>
+
+          <div class='ace-brython fragment' data-components='code'
+               style='font-size: .6em;'
+          >
+            <script type='text/x.ace-brython'>
+              sucesso = False
+              # Pedir senha no máximo 5 vezes
+              for i in range(5):
+                  senha = input('Digite a senha: ')
+                  if senha == '1234':
+                    sucesso = True
+                    break
+
+              if sucesso:
+                  print('Login realizado com sucesso')
+              else:
+                  print('Login bloqueado')
+
+            </script>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Usando <code>else</code> em laços</h4>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Usando <code>else</code> em laços</h4>
+
+          <p>
+            Python permite definir um bloco para ser executado quando o laço é
+            finalizado "<em>normalmente</em>":
+          </p>
+
+          <ul>
+            <li>
+              <code>while</code>: quando o laço para por causa da condição
+            </li>
+            <li>
+              <code>for</code>: quando o laço para por ter consumido todos os
+              items do iterável
+            </li>
+          </ul>
+
+          <p class='local-standout-box fragment' style='bottom: 2em;'>
+            Em outras palavras: quando o laço <strong>não é interrompido por um
+            <code>break</code></strong>  🙂
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Usando <code>else</code> em laços</h4>
+
+          <p style='font-size: .9em;'>
+            Isso é feito adicionando <code>else:</code> seguido de um bloco:
+          </p>
+
+          <div class='ace-brython' data-readonly data-components='code'>
+            <script type='text/x.ace-brython'>
+              while condicao:
+                  ...
+              else:
+                  ...
+            </script>
+          </div>
+          <br/>
+          <div class='ace-brython' data-readonly data-components='code'>
+            <script type='text/x.ace-brython'>
+              for i in iteravel:
+                  ...
+              else:
+                  ...
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Usando <code>else</code> em laços</h4>
+
+          <p>Exemplo: modificar o exemplo de permitir no máximo 5 tentativas de
+          login.</p>
+
+          <div class='ace-brython fragment' data-components='code'
+               style='font-size: .6em;'
+          >
+            <script type='text/x.ace-brython'>
+              # Pedir senha no máximo 5 vezes
+              for i in range(5):
+                  senha = input('Digite a senha: ')
+                  if senha == '1234':
+                    print('Login realizado com sucesso')
+                    break
+              else:
+                  print('Login bloqueado')
+            </script>
+          </div>
+          <br/>
+          <div class='fragment' style='font-size: .8em; text-align: left;'>
+            Prós:<br/>
+            <ul style='margin-top: .2ex;'>
+              <li>Variável <code>sucesso</code> não mais necessária!</li>
+              <li>Código mais simples</li>
+            </ul>
+          </div>
+        </section>
+
+
+
         <section>
             <div class='r-fit-text'>
                 Até a próxima!
             </div>
         </section>
+
       </div>
     </div>
 
