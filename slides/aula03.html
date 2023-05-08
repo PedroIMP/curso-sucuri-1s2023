@@ -33,277 +33,888 @@
             ## Aula 03
         </section>
 
-
-        <section data-auto-animate>
-          <h3>As condições do <code>if</code></h3>
+        <section>
+          <h3>Tratamento de erros</h3>
         </section>
 
-        <section data-auto-animate>
-          <h3>As condições do <code>if</code></h3>
-          <p style='font-size: .8em;'>Como vimos, a instrução <code>if</code>
-          sempre requer uma <strong>condição</strong>, que é escrita em forma
-          de expressão:</p>
 
-          <div
-              data-id='if-syntax'
-              style='
-                font-size: .8em;
-                margin-top: 1em;
-                text-align: left;
-                display: flex;
-                flex-direction: column;
+        <section data-auto-animate>
+          <h4>Tratamento de erros</h4>
+
+          <p>O que acontecerá ao executarmos o seguinte código?</p>
+
+          <div class='ace-brython fragment'>
+            <script type='text/x.ace-brython'>
+              a = int('treze')
+            </script>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Tratamento de erros</h4>
+
+          <p class='fragment fade-in-then-semi-out'>
+            O código anterior causou Python a lançar uma
+            <strong>exceção</strong>!
+          </p>
+
+          <p class='fragment fade-in-then-semi-out'>
+            <strong>Exceções</strong> são objetos utilizados por Python para
+            representar erros.
+          </p>
+
+          <p class='fragment'>
+            Se elas não são capturadas pelo nosso código, Python
+            <strong>aborta</strong> a execução do resto do programa.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em;'>
+            Como capturar exceções?
+          </p>
+
+          <p class='fragment'>
+            Através da instrução <code>try</code>:
+          </p>
+
+          <div class='fragment ace-brython' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                def quadrado(n):
+                    try:
+                        n = int(n)
+                    except:
+                        print('Número inválido:', n)
+
+
+                quadrado('treze')
+                quadrado(13)
+              </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em;'>
+            Podemos utilizar a cláusula <code>else</code> para adicionar código
+            a ser executado apenas se o bloco definido por <code>try</code> for
+            executado com sucesso:
+          </p>
+
+          <div class='fragment ace-brython' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                def quadrado(n):
+                    try:
+                        n = int(n)
+                    except:
+                        print('Número inválido:', n)
+                    else:
+                        print(n, 'ao quadrado é', n**2)
+
+
+                quadrado('treze')
+                quadrado(13)
+              </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em;'>
+            Podemos utilizar a cláusula <code>finally</code> para adicionar
+            código a ser executado em ambos os casos (erro ou não erro):
+          </p>
+
+          <div class='fragment ace-brython' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                def quadrado(n):
+                    try:
+                        n = int(n)
+                    except:
+                        print('Número inválido:', n)
+                    else:
+                        print(n, 'ao quadrado é', n**2)
+                    finally:
+                        print('Tchau!')
+
+
+                quadrado('treze')
+                quadrado(13)
+              </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em; margin-bottom: 0;'>
+            Há diversos tipos de erros:
+          </p>
+
+          <ul style='font-size: .8em; margin-top: 0;'>
+            <li class='fragment'>
+              <code>ValueError</code>: Ocorre quando um valor utilizado em uma
+              operação é inválido. Esse tipo de exceção é lançada pela função
+              <code>int()</code>, por exemplo.
+            </li>
+
+            <li class='fragment'>
+              <code>TypeError</code>: Ocorre quando um valor utilizado em uma
+              operação não é de um tipo esperado. Esse tipo de exceção é
+              lançada quando tentamos executar <code>1 + 'a'</code>, por
+              exemplo.
+            </li>
+
+            <li class='fragment'>
+              <code>ZeroDivisionError</code>: Ocorre quando tentamos dividir um
+              número por zero.
+            </li>
+
+            <li class='fragment'>
+              E <strong>muitos</strong> outros. A lista de exceções
+              pré-definidas de Python pode ser vista em
+              <a
+                href='https://docs.python.org/3/library/exceptions.html#bltin-exceptions'
+                target='_blank'>
+                https://docs.python.org/3/library/exceptions.html#bltin-exceptions
+              </a>.
+            </li>
+          </ul>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>
+            É sempre boa prática definirmos o tipo de exceção que queremos
+            capturar.
+          </p>
+
+          <p class='fragment' style='font-size: .8em;'>
+            Fazemos isso passando o tipo na cláusula <code>except</code>:
+          </p>
+
+          <div class='fragment ace-brython' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                def quadrado(n):
+                    try:
+                        n = int(n)
+                    except ValueError:
+                        print('Número inválido:', n)
+                    else:
+                        print(n, 'ao quadrado é', n**2)
+                    finally:
+                        print('Tchau!')
+
+
+                quadrado('treze')
+                quadrado(13)
+              </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>
+            É possível capturar mais de um tipo de exceção:
+          </p>
+
+          <div class='fragment ace-brython' data-components='code' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                def potencia(base, expoente):
+                    try:
+                        base = float(base)
+                        expoente = float(expoente)
+                        resultado = base ** expoente
+                    except ValueError:
+                        print('Algum dos argumentos não é um número válido')
+                    except OverflowError:
+                        print('O resultado é muito grande')
+                    else:
+                        print(base, 'elevado a', expoente, 'é', resultado)
+
+
+                potencia('três', '3')
+                potencia('3', '3')
+                potencia('2.4', '1000')
+              </script>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Tratamento de erros</h4>
+
+          <p>
+            Tratamento de erros é uma parte bem importante do seu código!
+          </p>
+          <p>
+            Um código de qualidade sempre realiza tratamento de erros quando
+            apropriado.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Tratamento de erros</h4>
+
+          <p>
+            Exemplo: validação de valores de entrada do programa.
+          </p>
+
+          <div class='fragment ace-brython' data-components='code' style='font-size: .6em;'>
+              <script type='text/x.ace-brython'>
+                while True:
+                    n = input('Valor de n: ')
+
+                    try:
+                        n = int(n)
+                    except ValueError:
+                        print('n deve ser um número inteiro')
+                    else:
+                        break
+
+                soma = sum(range(n))
+                print('a soma de 0 até', n - 1, 'é', soma)
+              </script>
+          </div>
+        </section>
+
+        <section>
+          <h3>Coleções</h3>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>Até agora trabalhamos com tipos que armazenam apenas um valor
+          cada...</p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>Até agora trabalhamos com tipos que armazenam apenas um valor
+          cada...</p>
+
+          <p>
+            Entretanto, muitas vezes (<em>muitas mesmo</em>), é importante termos a
+            capacidade de organizar nossos dados em estruturas mais complexas.
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h3>Coleções</h3>
+
+          <p>
+            Entretanto, muitas vezes (<em>muitas mesmo</em>), é importante termos a
+            capacidade de organizar nossos dados em estruturas mais complexas.
+          </p>
+
+          <p>
+            Para isso podemos utilizar os diferentes tipos de
+            <strong>coleções</strong> que Python nos oferece!
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h3>Coleções</h3>
+
+          <p>
+          Coleções são <strong>estruturas de dados</strong> que
+          <strong>armazenam</strong> múltiplos valores na memória do computador
+          e provêem formas convenientes de <strong>acessarmos</strong> esses
+          valores em algum momento do programa em execução.
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h3>Coleções</h3>
+
+          <p style='font-size: .8em'>
+            Listamos aqui quatro tipos básicos de coleções:
+          </p>
+
+          <div style='
+              margin: auto;
+              text-align: left;
+              font-size: .7em;
+              display: inline-block;
               '
           >
-            <code>if <strong>{condicao}</strong>:</code>
+            <div>Tupla: <code>(2, 3, 5, 'Alice', False, 5)</code></div>
+            <div>Lista: <code>[2, 3, 5, 'Alice', False, 5]</code></div>
+            <div>Conjunto: <code>{2, 3, 5, 'Alice', False}</code></div>
+            <div>Dicionário: <code>{'idade': 35, 'nome': 'Alice', 'casada': False}</code></div>
           </div>
-
-          <p class='fragment' style='font-size: .8em; margin-top: 2em;'>
-            Adivinhe o tipo resultante dessa expressão...
-          </p>
         </section>
 
 
-
         <section data-auto-animate>
-          <div
-              data-id='if-syntax'
-              style='
-                font-size: .8em;
-                margin-top: 1em;
-                text-align: left;
-                display: flex;
-                flex-direction: column;
-              '
-          >
-            <code>if <strong>{condicao}</strong>:</code>
-          </div>
+          <h4>Tuplas</h4>
 
-          <p style='font-size: 1em; margin-top: 2em;'>
-            Isso mesmo! O valor resultante dessa expressão é um
-            <code>bool</code>
-          </p>
+          <p>Uma sequência de valores.</p>
 
-
-          <p class='fragment' style='font-size: .8em; margin-top: 2em;'>
-            (Mesmo se a expressão não for originalmente um valor booleano,
-            Python faz a "conversão" no momento de verificar a condição)
-          </p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Valores booleanos</h3>
-          <p style='font-style: italic;'>É 8 ou 80...</p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Valores booleanos</h3>
-          <p>Valores booleanos admitem apenas dois possíveis valores:</p>
+          <p>Os valores não precisam necessariamente ser do mesmo tipo.</p>
           <div class='python-repl'><!--
-          >>> True
-          True
-          >>> False
-          False
-          --></div>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Expressões booleanas</h3>
-
-          <p>Python possui diversos operadores de <strong>comparação</strong></p>
-
-          <p>Os resultados das comparações são do tipo <code>bool</code></p>
-          <div class='python-repl'><!--
-          >>> imc(120, 1.9) < 30
-          False
-          >>> len('Gustavo') == 7
-          True
-          >>> 2 >= 1
-          True
+          >>> t = (2, 3, 5, 'Alice', False, 5)
+          >>> t
+          (2, 3, 5, 'Alice', False, 5)
           --></div>
         </section>
 
 
         <section data-auto-animate data-reusable>
-          <h3>Expressões booleanas</h3>
-
-          <div style='font-size: .8em; text-align: left; margin-bottom: 1ex;' data-reusable-tag='title'>
-            <code>==</code> → Igualdade
-            <br/>
-            <code>!=</code> → Diferença
-          </div>
-
-          <div data-reusable-tag='code'>
+          <h4>Tuplas</h4>
+          <p
+            style='font-size: .8em; text-align: left'
+            data-reusable-tag='title'
+          >
+          Alguns exemplos:
+          </p>
+          <div
+            style='display: flex; flex-flow: column; gap: 1ex; font-size: .8em;'
+            data-reusable-tag='repl'>
             <div class='python-repl'><!--
-            >>> 3 == 8
+            >>> tupla1 = (1,5,1)
+            >>> tupla2 = ('Avenida','24A')
+            >>> tupla3 = ('A',32)
+            >>> tupla4 = (64.122,1)
+            --></div>
+            <div class='python-repl'><!--
+            >>> tupla2
+            ('Avenida', '24A')
+            >>> tupla3
+            ('A', 32)
+            --></div>
+            <div class='python-repl'><!--
+            >>> tupla5 = (tupla1, tupla4, tupla1) # Tupla de tuplas
+            >>> print('Tupla de tuplas:', tupla5)
+            Tupla de tuplas: ((1, 5, 1), (64.122, 1), (1, 5, 1))
+            --></div>
+          </div>
+        </section>
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Podemos acessar os elementos da tupla através de
+            <strong>indexação</strong>:
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+            >>> t = (4, 2, 6, 1)
+            >>> t[0]
+            4
+            >>> t[2]
+            6
+            >>> t[-1]
+            1
+            >>> t[-3]
+            2
+            --></div>
+            <div class='python-repl'><!--
+            >>> t = ((3, 5), (9, 1), (6, 1))
+            >>> t[0]
+            (3, 5)
+            >>> t[-1]
+            (6, 1)
+            >>> t[0][1]
+            5
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Podemos acessar regiões  da tupla através de
+            <strong>slices</strong> (fatias):
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+            >>> frutas = ('banana', 'abacaxi', 'limão', 'laranja', 'melancia')
+            >>> frutas[1:3]  # O segundo índice é exclusivo
+            ('abacaxi', 'limão')
+            >>> frutas[1:]   # Podemos omitir índices
+            ('abacaxi', 'limão', 'laranja', 'melancia')
+            >>> frutas[:2]   # Podemos omitir índices
+            ('banana', 'abacaxi')
+            >>> frutas[:-2]   # Índices negativos também funcionam
+            ('banana', 'abacaxi', 'limão')
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Podemos checar se um item está presente na tupla com o operador
+            <code>in</code>:
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+            >>> frutas = ('banana', 'abacaxi', 'limão', 'laranja', 'melancia')
+            >>> 'jabuticaba' in frutas
             False
-            >>> 81 == 9**2
+            >>> 'laranja' in frutas
             True
-            >>> 'Dracula' == 'Edward'
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Tuplas são <strong>imutáveis</strong> - não podem ser modificadas:
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+            >>> frutas = ('banana', 'abacaxi', 'limão', 'laranja', 'melancia')
+            >>> frutas[2] = 'pitaya'
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in <module>
+            TypeError: 'tuple' object does not support item assignment
+            --></div>
+          </template>
+        </template>
+
+
+        <section data-auto-animate>
+          <h4>Listas</h4>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Listas</h4>
+          <p>Podemos olhar para listas como "tuplas mutáveis"</p>
+          <p>São sequências de valores que podem ser alteradas</p>
+        </section>
+
+
+
+        <section data-auto-animate data-reusable>
+          <h4>Listas</h4>
+          <p
+            style='font-size: .8em; text-align: left'
+            data-reusable-tag='title'
+          >
+          Listas usam <code>[</code> e <code>]</code> em sua construção e
+          possuem praticamente a mesma interface de acesso de tuplas:
+          </p>
+          <div
+            style='display: flex; flex-flow: column; gap: 1ex; font-size: .8em;'
+            data-reusable-tag='repl'>
+            <div class='python-repl'><!--
+            >>> frutas = ['banana', 'abacaxi', 'limão', 'laranja', 'melancia']
+            >>> frutas[1:3]
+            ['abacaxi', 'limão']
+            >>> frutas[-1]
+            'melancia'
+            >>> 'morango' in frutas
             False
-            >>> 1 != 1.0
-            False
-            >>> 450 != '450'
+            >>> 'limão' in frutas
             True
             --></div>
           </div>
         </section>
 
 
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Listas são mutáveis!
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+              >>> frutas = ['banana', 'abacaxi', 'limão', 'laranja', 'melancia']
+            --></div>
+            <div class='python-repl'><!--
+              >>> frutas[1] = 'morango'
+              >>> frutas
+              ['banana', 'morango', 'limão', 'laranja', 'melancia']
+            --></div>
+            <div class='python-repl'><!--
+              >>> frutas[-1] = 'uva'
+              >>> frutas
+              ['banana', 'morango', 'limão', 'laranja', 'uva']
+            --></div>
+            <div class='python-repl'><!--
+              >>> frutas[1:4] = ['abacate']
+              >>> frutas
+              ['banana', 'abacate', 'uva']
+            --></div>
+            <div class='python-repl'><!--
+              >>> del frutas[1]
+              >>> frutas
+              ['banana', 'uva']
+            --></div>
+          </template>
+        </template>
+
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Listas possuem diversos <strong>métodos</strong>:
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+              >>> frutas = ['banana', 'abacaxi', 'limão', 'laranja', 'melancia']
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.append('mamão')
+            >>> frutas
+            ['banana', 'abacaxi', 'limão', 'laranja', 'melancia', 'mamão']
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.insert(3, 'uva')
+            >>> frutas
+            ['banana', 'abacaxi', 'limão', 'uva', 'laranja', 'melancia', 'mamão']
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.pop()
+            'mamão'
+            >>> frutas
+            ['banana', 'abacaxi', 'limão', 'uva', 'laranja', 'melancia']
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.remove('laranja')
+            >>> frutas
+            ['banana', 'abacaxi', 'limão', 'uva', 'melancia']
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.sort()
+            >>> frutas
+            ['abacaxi', 'banana', 'limão', 'melancia', 'uva']
+            --></div>
+          </template>
+          <template data-append>
+            <div class='fragment local-standout-box' style='bottom: 2em;'>
+                <strong>Métodos</strong> são funções vinculadas a objetos. Por
+                exemplo, <code>frutas.append</code> é uma função vinculada ao
+                objeto referenciado por <code>frutas</code>.
+            </div>
+          </template>
+        </template>
+
+
         <section data-auto-animate>
-          <h3>Expressões booleanas</h3>
-
-          <p>Note que <code>==</code> e <code>=</code> possuem
-          <strong>significados diferentes</strong>:</p>
-
-          <div class='python-repl'><!--
-          >>> x = 98
-          >>> x = x + 1  # Incrementando o valor de x
-          >>> x
-          99
-          --></div>
-
-          <br />
-
-          <div class='python-repl'><!--
-          >>> x = 98
-          >>> x == x + 1  # Comparando 98 com 99
-          False
-          >>> x
-          98
-          --></div>
+          <h4>Conjuntos</h4>
         </section>
 
 
-        <template data-reuse>
-          <template data-tag='title'>
-            <code>&lt;</code>
-            <code>&lt;=</code>
-            <code>&gt;</code>
-            <code>&gt;=</code>
-            → Desigualdades
-          </template>
 
-          <template data-tag='code'>
+        <section data-auto-animate>
+          <h4>Conjuntos</h4>
+          <p>Um <strong>conjunto</strong> é uma coleção onde não há repetição
+          nem ordenação de valores.</p>
+        </section>
+
+
+
+        <section data-auto-animate data-reusable>
+          <h4>Conjuntos</h4>
+          <p
+            style='font-size: .8em; text-align: left'
+            data-reusable-tag='title'
+          >
+          Conjuntos são construídos com <code>{</code> e <code>}</code>. E
+          e permitem adição, remoção e consulta de items.
+          </p>
+          <div
+            style='display: flex; flex-flow: column; gap: 1ex; font-size: .8em;'
+            data-reusable-tag='repl'>
             <div class='python-repl'><!--
-            >>> abs(-2) >= 1
-            True
-            >>> 10 >= 10
-            True
-            >>> 10 > 10
-            False
-            >>> 87 ** .5 < 9
-            False
-            >>> 80 ** .5 < 9
-            True
+            >>> frutas = {'banana', 'abacaxi', 'limão', 'laranja', 'melancia'}
             --></div>
-          </template>
-        </template>
-
-
-
-        <template data-reuse>
-          <template data-tag='title'>
-            <code>and</code>
-            <code>or</code>
-            → Operadores binários booleanos
-          </template>
-
-          <template data-tag='code'>
             <div class='python-repl'><!--
-            >>> abs(-2) >= 1 and 'Alice' + 'Robert' == 'Love'
-            False
-            >>> abs(-2) >= 1 or 'Alice' + 'Robert' == 'Love'
-            True
+            >>> frutas.add('uva')
+            >>> frutas
+            {'banana', 'uva', 'abacaxi', 'melancia', 'laranja', 'limão'}
             --></div>
-
-            <div class='python-repl' style='margin-top: 1em;'><!--
-            >>> False and print('hello') # Early stop
-            False
-            >>> True or print('hello') # Early stop
-            True
-            >>> True and print('hello') # Agora print é executado
-            hello
-            >>> False or print('hello') # Agora print é executado
-            hello
-            --></div>
-          </template>
-        </template>
-
-
-
-        <template data-reuse>
-          <template data-tag='title'>
-            <code>not</code>
-            → Operador de negação
-          </template>
-
-          <template data-tag='code'>
             <div class='python-repl'><!--
-            >>> not len('Alice') > 5
-            True
-            >>> not True
-            False
-            >>> not not True  # Dupla negação
+            >>> frutas.add('abacaxi')  # Esta operação não possui efeito
+            >>> frutas
+            {'banana', 'uva', 'abacaxi', 'melancia', 'laranja', 'limão'}
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.pop()  # Remove um elemento qualquer
+            'banana'
+            >>> frutas
+            {'uva', 'abacaxi', 'melancia', 'laranja', 'limão'}
+            --></div>
+            <div class='python-repl'><!--
+            >>> frutas.remove('laranja') # Remove um item específico
+            >>> frutas
+            {'uva', 'abacaxi', 'melancia', 'limão'}
+            --></div>
+            <div class='python-repl'><!--
+            >>> 'laranja' in frutas  # É muito mais rápido do que em listas
             True
             --></div>
-          </template>
-        </template>
+          </div>
+        </section>
 
 
 
         <section data-auto-animate>
-          <h3>Valores "Truthy" e "Falsey"</h3>
+          <h4>Dicionários</h4>
+        </section>
 
+
+
+        <section data-auto-animate>
+          <h4>Dicionários</h4>
           <p>
-          A função <code>bool()</code> converte valores para o tipo
-          <code>bool</code>.
+            Um <strong>dicionário</strong> faz um mapeamento de um conjunto de
+            chaves para respectivos valores.
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Dicionários</h4>
+          <p>
+            Um <strong>dicionário</strong> faz um mapeamento de um conjunto de
+            chaves para respectivos valores.
+          </p>
+          <p>
+            Cada item do dicionário é um par <strong>chave→valor</strong>.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Dicionários</h4>
+          <p>
+            Um <strong>dicionário</strong> faz um mapeamento de um conjunto de
+            chaves para respectivos valores.
+          </p>
+          <p>
+            Cada item do dicionário é um par <strong>chave→valor</strong>.
+          </p>
+          <p>
+            Qualquer tipo imutável (e.g. <code>str</code> <code>int</code>
+            <code>tuple</code>) pode ser utilizado como chave, e qualquer outro
+            tipo pode ser usado como valor.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate data-reusable>
+          <h4>Dicionários</h4>
+          <p
+            style='font-size: .8em; text-align: left'
+            data-reusable-tag='title'
+          >
+            Um uso comum de dicionários é para representação de alguma entidade
+            com diferentes atributos:
+          </p>
+          <div
+            style='display: flex; flex-flow: column; gap: 1ex; font-size: .8em;'
+            data-reusable-tag='repl'>
+            <div class='python-repl'><!--
+            >>> alice = {'name': 'Alice', 'age': 27, 'country': 'Australia'}
+            >>> alice['name'] # Acessando a chave 'name', cujo valor é 'Alice'
+            'Alice'
+            >>> alice['age']
+            27
+            >>> alice['age'] += 1
+            >>> alice
+            {'name': 'Alice', 'age': 28, 'country': 'Australia'}
+            --></div>
+          </div>
+        </section>
+
+
+        <template data-reuse>
+          <template data-tag='title'>
+            Uma ótima aplicação de dicionários é utilizá-los como tabela
+            <em>hash</em> para acesso rápido a elementos por alguma chave:
+          </template>
+
+          <template data-tag='repl'>
+            <div class='python-repl'><!--
+            >>> table = {'id1': {'name': 'Alice', 'age': 27}, 'id2': {'name': 'John', 'age': 67}}
+            --></div>
+            <div class='python-repl'><!--
+            >>> table['id1'] # Acessando o registro com id1
+            {'name': 'Alice', 'age': 27}
+            --></div>
+            <div class='python-repl'><!--
+            >>> table['id3'] = {'name': 'Josh', 'age': 18} # Adicionando um novo elemento
+            >>> table
+            {'id1': {'name': 'Alice', 'age': 27}, 'id2': {'name': 'John', 'age': 67}, 'id3': {'name': 'Josh', 'age': 18}}
+            --></div>
+            <div class='python-repl'><!--
+            >>> del table['id2']  # Removendo elemento com id2
+            >>> table
+            {'id1': {'name': 'Alice', 'age': 27}, 'id3': {'name': 'Josh', 'age': 18}}
+            --></div>
+            <div class='python-repl'><!--
+            >>> table['xyz']  # Acessado elemento inexistente
+            Traceback (most recent call last):
+              File "<stdin>", line 1, in <module>
+            KeyError: 'xyz'
+            --></div>
+            <div class='python-repl'><!--
+            >>> 'xyz' in table  # Verificando existência de chave, tão rápido quanto para conjuntos
+            False
+            --></div>
+          </template>
+        </template>
+
+
+
+        <section data-auto-animate data-reusable>
+          <h4>Coleções</h4>
+
+          <p style='font-size: .6em'>Todos esses tipos de coleções são
+          <strong>iteráveis</strong>, isso significa que é possível percorrer
+          seus valores utilizando <code>for</code>, por exemplo.</p>
+
+
+          <div class='ace-brython' style='font-size: .5em;' data-reusable-tag='code'>
+              <script type='text/x.ace-brython'>
+                frutas = ['banana', 'abacaxi', 'limão', 'laranja', 'melancia']
+
+                print('As frutas que temos na feira são:')
+                for fruta in frutas:
+                  print(fruta)
+              </script>
+          </div>
+        </section>
+
+        <template data-reuse>
+          <template data-tag='code'>
+            <script type='text/x.ace-brython'>
+              # Calcular perímetro do polígono
+              poligono = [(1.5, 0.0), (1.0, 1.0), (-1.0, 1.5), (0, -1)]
+              perimetro = 0
+
+              prev = poligono[-1]
+              for point in poligono:
+                  x, y = point # Equivalente a x = point[0] e y = point[1]
+                  prev_x, prev_y = prev
+
+                  dist = ((x - prev_x)**2 + (y - prev_y)**2)**.5
+                  perimetro += dist
+
+                  prev = point
+
+              print('Perímetro:', perimetro)
+
+            </script>
+          </template>
+        </template>
+
+
+        <section data-auto-animate>
+          <h4>Síntese de Coleções</h4>
+          <p>
+            Para todas as coleções é possível utilizar a função
+            <code>len()</code> para descobrir a quantidade de
+            elementos contidos nas mesmas.
+          </p>
+          <p class='fragment'>
+            Para as Listas e Tuplas, o acesso de um elemento ou uma
+            fatia de seus elementos é feito utilizando número
+            (ou slice) entre colchetes (e.g. lista[1], tupla[:3])
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Síntese de Coleções</h4>
+          <p class='fragment fade-in-then-semi-out'>
+            Tuplas: Recomendado quando a ordem dos valores tem
+            significado; permite acesso individual de itens
+            ou por slices; imutáveis
+          </p>
+          <p class='fragment'>
+            Listas: Recomendado quando se pretende alterar a ordem,
+            acrescentar ou remover itens; permite
+            acesso individual de itens ou por slices; mutáveis
+          </p>
+        </section>
+
+        <section data-auto-animate>
+          <h4>Síntese de Coleções</h4>
+          <p class='fragment fade-in-then-semi-out'>
+            Dicionários: Recomendado quando se deseja indexar
+            pares de chave-valor; permite acesso individual
+            de itens; mutáveis
+          </p>
+          <p class='fragment fade-in-then-semi-out'>
+            Conjuntos: Recomendado quando se deseja registrar ocorrência
+            de elementos sem  manter repetições; mutável
           </p>
 
-          <div class='python-repl'><!--
-          >>> bool(0)  # Zero é falsey
-          False
-          >>> bool(0.1)  # Qualquer número diferente de zero é truthy
-          True
-          >>> bool(45)
-          True
-          >>> bool("")  # A string vazia
-          False
-          >>> bool("uma string não vazia")
-          True
-          >>> bool("  ")  # Uma string com espaços em brancos não é vazia
-          True
-          --></div>
-
+          <p class='fragment' style='font-size: .9em'>
+          Tanto conjuntos quanto dicionários possuem rápido tempo de
+          <strong>busca</strong> por chave. Para esse propósito são preferíveis
+          em relação a tuplas e listas.
+          </p>
         </section>
 
+
         <section data-auto-animate>
-          <h3>Valores "Truthy" e "Falsey"</h3>
+          <h4>Síntese de Coleções</h4>
+          <p>Conseguiremos entender melhor o uso de coleções conforme formos avançando
+          com os exemplos e tarefas!</p>
+        </section>
 
-          <p>Esta conversão é implicitamente realizada por Python em lugares
-          onde se espera um <code>bool</code>:</p>
 
-          <div class='ace-brython' style='font-size: .5em;'>
+
+        <section data-auto-animate>
+          <h4>Exemplo 1</h4>
+          <p>
+            Alice quer comprar algumas coisas novas para sua casa...
+          </p>
+          <p class='fragment'>
+            Porém precisa ir comprando aos poucos para não exceder o orçamento!
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            Lista de compras de Alice
+          </p>
+          <div
+            class='ace-brython'
+            style='font-size: .4em; height: 12em;'
+            data-components='code'
+          >
             <script type='text/x.ace-brython'>
-              nome = 'Bilbo'
-              sobrenome = ''
-
-              if nome:
-                  print('Olá, ' + nome)
-
-                  if sobrenome:
-                      print('Já sei tudo sobre você, ' + nome + ' ' + sobrenome)
-                  else:
-                      print('Qual é seu sobrenome?')
-
-              else:
-                  print('Olá, desconhecido')
-                  print('Qual é o seu nome?')
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
             </script>
           </div>
         </section>
@@ -311,193 +922,1506 @@
 
 
         <section data-auto-animate>
-          <h3>Expressões Booleanas</h3>
-
-          <p style='font-size: .7em'> Os operadores booleanos nos ajudam a
-          escrever condições mais expressivas.</p>
-
-          <p class='fragment' style='font-size: .7em'> Exemplo: vamos escrever
-          um programa que diz se um dado ano é bissexto ou não.</p>
-
-
-          <div class='fragment'>
-            <div style='display: flex; flex-direction: column;'>
-              <div style='flex: 1'>
-                <p style='font-size: .7em;'>Sem operadores booleanos: </p>
-                <div
-                  class='ace-brython' style='font-size: .5em;'
-                  data-readonly
-                  data-components='code'
-                >
-                  <script type='text/x.ace-brython'>
-                    def ano_eh_bissexto(ano):
-                        if ano % 400 == 0:
-                          return True
-                        elif ano % 4 == 0:
-                          if ano % 100 != 0:
-                            return True
-                        return False
-                  </script>
-                </div>
-              </div>
-
-              <div class='fragment' style='flex: 1'>
-                <p style='font-size: .7em;'>Com operadores booleanos: </p>
-                <div
-                  class='ace-brython' style='font-size: .5em;'
-                  data-readonly
-                  data-components='code'
-                >
-                  <script type='text/x.ace-brython'>
-                    def ano_eh_bissexto(ano):
-                        if ano % 400 == 0 or (ano % 4 == 0 and ano % 100 != 0):
-                          return True
-                        return False
-                  </script>
-                </div>
-              </div>
-            </div>
-          </div>
+          <p style='font-size: .9em'>
+            Para comprar os itens da lista, Alice consegue separar 1500 reais por
+            mês
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Vamos ajudá-la a decidir o que comprar a cada mês!
+          </p>
         </section>
 
 
 
         <section data-auto-animate>
-          <p>A instrução <code>if</code> não é a única que utiliza expressões
-          booleanas como condição!</p>
+          <p style='font-size: .9em'>
+            Vamos considerar que ao comprar um item, Alice risca (remove)
+            ele da lista.
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Deste modo, podemos repetir o bloco <em>enquanto</em> a lista não
+            estiver vazia.
+          </p>
         </section>
 
 
 
-        <section data-auto-animate>
-          <p>Vamos aprender agora sobre <strong>laços de repetição</strong></p>
-        </section>
+        <section>
+          <p>
+            Compras de Alice
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 12em;'
+            data-max-lines=20
+            data-components='code'
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
 
-
-
-        <section data-auto-animate>
-          <h3>Laços de Repetição</h3>
-
-          <p>É <strong>muito comum</strong> (<em>muito mesmo</em>) programas de
-          computadores executarem um mesmo conjunto de instrução
-          <strong>repetidamente</strong> até que uma <strong>condição</strong>
-          seja satisfeita.</p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <h3>Laços de Repetição</h3>
-
-          <p>Um exemplo que já conhecemos:</p>
-          <div class='fragment'
-            data-fragment-index='0'
-            style='display: flex; justify-content: center;'>
-              <div style='flex: none'>
-                  <img
-                      src='images/stickman-worship.png'
-                      style='height: 6em; vertical-align: bottom; margin-top: 3em;'
-                  />
-                  <img
-                      src='images/python-logo-3d.png'
-                      style='
-                          vertical-align: top;
-                          height: 7.5em;
-                          margin-top: 0;
-                          animation: local-glowing 3s infinite ease-in-out;
-                          '
-                  />
-              </div>
-          </div>
-          <p class='fragment' data-fragment-index='0'>A interface REPL do Python</p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <p>A interface REPL do Python</p>
-          <img
-              src='images/python-logo-3d.png'
-              style='
-                  vertical-align: middle;
-                  height: 4em;
-                  animation: local-glowing 3s infinite ease-in-out;
-                  margin-right: 2em;
-                  '
-          />
-          <img
-              src='images/repl-flowchar.svg'
-              style='height: 10em; vertical-align: middle;'
-          />
-          <p style='font-size: .7em'>Estratégia: ler e executar comandos até
-          que o usuário requisite a saída do shell</p>
-        </section>
-
-
-
-        <section data-auto-animate>
-          <p>Nosso primeiro laço</p>
-        </section>
-
-
-        <section data-auto-animate>
-          <p>Nosso primeiro laço</p>
-          <p style='font-size: .8em'>Vamos fingir que não conhecemos a fórmula
-          fechada da soma de uma PA...</p>
-        </section>
-
-
-        <section data-auto-animate>
-          <p>Nosso primeiro laço</p>
-          <p style='font-size: .8em'>Vamos escrever uma função responsável por
-          somar os primeiros <code>n</code> números naturais:</p>
-        </section>
-
-
-        <section data-auto-animate>
-          <p>Nosso primeiro laço</p>
-          <p style='font-size: .8em'>Vamos escrever uma função responsável por
-          somar os primeiros <code>n</code> números naturais:</p>
-
-          <img src='images/soma-flowchart.svg' />
-        </section>
-
-
-        <section data-auto-animate>
-          <p>Nosso primeiro laço</p>
-          <p style='font-size: .8em'>Vamos escrever uma função responsável por
-          somar os primeiros <code>n</code> números naturais:</p>
-
-          <div class='ace-brython' style='font-size: .5em; height: 14em;'>
-            <script type='text/x.ace-brython' data-id='first-loop-while'>
-              def soma_n(n):
-                  i = 0
-                  soma = 0
-
-                  while i < n:
-                      soma += i
-                      i += 1
-
-                  return soma
-
-
-              print(soma_n(10))
-              print(soma_n(4))
+              while compras:
+                # Bloco que decide o que Alice vai comprar
             </script>
           </div>
+        </section>
 
-          <div class='fragment local-standout-box'><code>while</code> é uma das
-            duas estruturas de repetição de Python. A outra é <code>for</code>
-            e a veremos na próxima aula.
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em'>
+            Como vimos, a cada mês Alice coloca 1500 reais dentro de um cofrinho.
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Assim, em todo início de mês o cofrinho é <em>incrementado</em>
+            em 1500.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em'>
+            Após abastecer seu cofre, Alice olha para sua lista de compras
+            e vê o que pode comprar com o dinheiro do cofrinho.
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            E compra tudo o que conseguir comprar.
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            Compras de Alice
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 28em;'
+            data-max-lines=20
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
+              cofrinho = 0
+
+              while compras:
+                cofrinho += 1500    # abastecimento do cofrinho
+                compra_mes = []
+
+                for item in compras:
+                  if item[1] <= cofrinho: # se tem dinheiro, compra
+                    cofrinho -= item[1]
+                    compra_mes.append(item) # adiciona item à lista de comprados
+                for comprado in compra_mes:  
+                  compras.remove(comprado)  # risca da lista o que já comprou
+                print('Este mês Alice comprou', compra_mes)
+              print('Alice comprou tudo o que queria!')
+            </script>
+          </div>
+          <div class='fragment local-standout-box' style='bottom: 2em;'>
+            Não podemos riscar o item da lista assim<br/>
+            que compramos ele? 🤔
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em'>
+            Ela conseguiu comprar tudo o que queria, legal!
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Quanto tempo levou para isso?
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            E quanto foi o gasto total?
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Quanto sobrou?
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Vamos descobrir!
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            Compras de Alice
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 32em;'
+            data-max-lines=20
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
+              cofrinho = 0
+              gasto_total = []    # armazenar gasto de cada mês
+              compras_total = []  # armazenar todos os itens comprados
+
+              while compras:
+                cofrinho += 1500    # abastecimento do cofrinho
+                gasto_mes = 0
+                compra_mes = []
+
+                for item in compras:
+                  if item[1] <= cofrinho: # se tem dinheiro, compra
+                    cofrinho -= item[1]
+                    gasto_mes += item[1]    # incrementa gasto do mês
+                    compra_mes.append(item) # adiciona item à lista de comprados
+                for comprado in compra_mes:  
+                  compras.remove(comprado)  # risca da lista o que já comprou
+
+                print('Este mês Alice gastou', gasto_mes,'comprando:', compra_mes)
+                compras_total.append(compra_mes)
+                gasto_total.append(gasto_mes)            
+
+              print()
+              print('Alice precisou de', len(gasto_total),'meses para comprar o que queria.')
+              print('Gastou um total de',sum(gasto_total),'reais.')
+              print('Sobrando', len(gasto_total)*1500 - sum(gasto_total),'reais em seu cofrinho')
+              print('E as compras de cada mês foram:',compras_total)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .9em'>
+            Conseguimos ajudar Alice com as compras!
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Mas e se ela quisesse comprar os itens mais baratos primeiro?
+          </p>
+          <p class='fragment' style='font-size: .9em'>
+            Ou os mais caros?
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            Compras de Alice (mais baratos primeiro)
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 32em;'
+            data-max-lines=20
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
+              cofrinho = 0
+              gasto_total = []    # armazenar gasto de cada mês
+              compras_total = []  # armazenar todos os itens comprados
+
+              compras.sort(key=lambda x:x[1]) # Basta ordenar a lista pelo preço!
+
+              while compras:
+                cofrinho += 1500    # abastecimento do cofrinho
+                gasto_mes = 0
+                compra_mes = []
+
+                for item in compras:
+                  if item[1] <= cofrinho: # se tem dinheiro, compra
+                    cofrinho -= item[1]
+                    gasto_mes += item[1]    # incrementa gasto do mês
+                    compra_mes.append(item) # adiciona item à lista de comprados
+                for comprado in compra_mes:  
+                  compras.remove(comprado)  # risca da lista o que já comprou
+
+                print('Este mês Alice gastou', gasto_mes,'comprando:', compra_mes)
+                compras_total.append(compra_mes)
+                gasto_total.append(gasto_mes)            
+
+              print()
+              print('Alice precisou de', len(gasto_total),'meses para comprar o que queria.')
+              print('Gastou um total de',sum(gasto_total),'reais.')
+              print('Sobrando', len(gasto_total)*1500 - sum(gasto_total),'reais em seu cofrinho')
+              print('E as compras de cada mês foram:',compras_total)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section>
+          <p>
+            Compras de Alice (mais caros primeiro)
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 32em;'
+            data-max-lines=20
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
+              cofrinho = 0
+              gasto_total = []    # armazenar gasto de cada mês
+              compras_total = []  # armazenar todos os itens comprados
+
+              compras.sort(key=lambda x:x[1], reverse= True) # Basta ordenar a
+              # lista pelo preço, porém de maneira reversa!
+              while compras:
+                cofrinho += 1500    # abastecimento do cofrinho
+                gasto_mes = 0
+                compra_mes = []
+
+                for item in compras:
+                  if item[1] <= cofrinho: # se tem dinheiro, compra
+                    cofrinho -= item[1]
+                    gasto_mes += item[1]    # incrementa gasto do mês
+                    compra_mes.append(item) # adiciona item à lista de comprados
+                for comprado in compra_mes:  
+                  compras.remove(comprado)  # risca da lista o que já comprou
+
+                print('Este mês Alice gastou', gasto_mes,'comprando:', compra_mes)
+                compras_total.append(compra_mes)
+                gasto_total.append(gasto_mes)            
+
+              print()
+              print('Alice precisou de', len(gasto_total),'meses para comprar o que queria.')
+              print('Gastou um total de',sum(gasto_total),'reais.')
+              print('Sobrando', len(gasto_total)*1500 - sum(gasto_total),'reais em seu cofrinho')
+              print('E as compras de cada mês foram:',compras_total)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section>
+          <p>
+            Removendo o item logo após a compra
+          </p>
+          <div 
+            class='ace-brython'
+            style='font-size: .4em;
+            height: 32em;'
+            data-max-lines=20
+          >
+            <script type='text/x.ace-brython'>
+              compras = [ ('Robô Aspirador de pó', 849.90), ('Abajur de chão', 200.00),
+                ('Ventilador de mesa', 94.90), ('Televisão 4k 50"', 2587.05),
+                ('Máquina de Café Expresso', 789.00), ('Poltrona Reclinável', 619.00),
+                ('Purificador de água', 539.90), ('Serra Circular', 372.93)
+              ]
+              cofrinho = 0
+              compras.sort(key=lambda x:x[1]) # Basta ordenar a lista pelo preço
+              print('Lista de compras ordenada:', compras,'\n')
+
+              while compras:
+                cofrinho += 1500    # abastecimento do cofrinho
+
+                print('Lista utilizada no for deste mês:', compras)
+                for item in compras:
+                  if item[1] <= cofrinho: # se tem dinheiro, compra
+                    cofrinho -= item[1]
+                    compras.remove(item)  # risca da lista o que já comprou
+                    print('Item removido', item)
+                    print('Lista após remoção', compras,'\n')
+            </script>
+          </div>
+          <div class='fragment local-standout-box' style='bottom: 2em;'>
+            Este código pula um elemento<br/>
+            a cada remoção!
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo 2</h4>
+          <p>Vamos melhorar aquele código com vários <code>if</code>s!
+        </section>
+
+
+        <section>
+          <div style='display: flex; flex-direction: column; height: var(--slide-height)'>
+          <div style='font-style: italic; font-size: .5em; flex: none;'>Relembrando...</div>
+          <div class='ace-brython' style='font-size: .4em; height: 25em; flex: 1;'>
+            <script type='text/x.ace-brython'>
+              cor = 'vermelho'
+              valor = 50
+              quantidade = 300
+              classe = 'a decidir'
+
+              if cor == 'azul' and valor == 50 and quantidade == 200:
+                classe = 'Classificação 1-a-a'
+              elif cor == 'azul' and valor == 100 and quantidade == 200:
+                classe = 'Classificação 1-a-b'
+              elif cor == 'azul' and valor == 150 and quantidade == 200:
+                classe = 'Classificação 1-a-c'
+              if cor == 'azul' and valor == 50 and quantidade == 300:
+                classe = 'Classificação 1-b-a'
+              elif cor == 'azul' and valor == 100 and quantidade == 300:
+                classe = 'Classificação 1-b-b'
+              elif cor == 'azul' and valor == 150 and quantidade == 300:
+                classe = 'Classificação 1-b-c'
+
+                # repetição do mesmo bloco de código, porém trocando a cor
+              elif cor == 'vermelho' and valor == 50 and quantidade == 200:
+                classe = 'Classificação 2-a-a'
+              elif cor == 'vermelho' and valor == 100 and quantidade == 200:
+                classe = 'Classificação 2-a-b'
+              elif cor == 'vermelho' and valor == 150 and quantidade == 200:
+                classe = 'Classificação 2-a-c'
+              if cor == 'vermelho' and valor == 50 and quantidade == 300:
+                classe = 'Classificação 2-b-a'
+              elif cor == 'vermelho' and valor == 100 and quantidade == 300:
+                classe = 'Classificação 2-b-b'
+              elif cor == 'vermelho' and valor == 150 and quantidade == 300:
+                classe = 'Classificação 2-b-c'
+
+              print(classe)
+            </script>
+        </section>
+
+        <section>
+          <p>
+            Nova versão!
+          </p>
+          <div class='ace-brython' style='font-size: .4em; height: 29em;'>
+            <script type='text/x.ace-brython'>
+              cor = 'vermelho'
+              valor = 50
+              quantidade = 300
+
+              classes = {
+                  ('azul',50,200):'Classificação 1-a-a',
+                  ('azul',100,200):'Classificação 1-a-b',
+                  ('azul',150,200):'Classificação 1-a-c',
+                  ('azul',50,300):'Classificação 1-b-a',
+                  ('azul',100,300):'Classificação 1-b-b',
+                  ('azul',150,300):'Classificação 1-b-c',
+
+                  ('vermelho',50,200):'Classificação 2-a-a',
+                  ('vermelho',100,200):'Classificação 2-a-b',
+                  ('vermelho',150,200):'Classificação 2-a-c',
+                  ('vermelho',50,300):'Classificação 2-b-a',
+                  ('vermelho',100,300):'Classificação 2-b-b',
+                  ('vermelho',150,300):'Classificação 2-b-c',
+              }
+
+              print(classes[(cor,valor,quantidade)])
+            </script>
           </div>
         </section>
 
 
         <section>
-            <div class='r-fit-text'>
-                Até a próxima!
+          <p>
+            Nova versão++!
+          </p>
+          <div class='ace-brython' style='font-size: .4em; height: 29em;'>
+            <script type='text/x.ace-brython'>
+              cor = 'vermelho'
+              valor = 50
+              quantidade = 300
+
+              mapa_valor = {50: 'a', 100: 'b', 150: 'c'}
+              mapa_qtd = {200: 'a', 300: 'b'}
+              mapa_cor = {'azul': '1', 'vermelho': '2'}
+
+              classe = 'Classificação ' + mapa_cor[cor]
+              classe += '-' + mapa_qtd[quantidade]
+              classe += '-' + mapa_valor[valor]
+
+              print(classe)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>BÔNUS</h4>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>List Comprehension</h4>
+          <p class='fragment' style='font-size: .9em'>
+            É uma sintaxe mais enxuta para a criação de uma lista a partir de um iterável!
+          </p>
+          <p class='fragment' style='font-size: .7em'>
+            Sintaxe:<br/>
+            <code>lista = [<em>expressão</em> for <em>item</em> 
+            in <em>iterável</em> if <em>condição</em>]</code>
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            List Comprehension
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 14em;'>
+            <script type='text/x.ace-brython'>
+              # lista com os números que são divisíveis por 2 e por 3
+              nums = [x for x in range(30) if x % 2 == 0 and (x % 3 == 0)]
+              print(nums)
+
+              # lista com quadrados dos números que são divisíveis por 2 e por 3
+              nums_sq = [x**2 for x in range(30) if x % 2 == 0 and (x % 3 == 0)]
+              print(nums_sq)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Dict Comprehension</h4>
+          <p style='font-size: .9em'>
+            Também pode ser usado para dicionários!
+          </p>
+          <p class='fragment' style='font-size: .7em'>
+            Sintaxe:<br/>
+            <code>{<em>chave: valor</em> for <em>item</em> in <em>iterável</em>
+             if <em>condição</em>}</code>
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            Também pode ser usado para dicionários!
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 10em;'>
+            <script type='text/x.ace-brython'>
+              # dicionário com os números que são divisíveis por 2 e por 3,
+              # e seus quadrados!
+              nums = {key:key**2 for key in range(30) if key % 2 == 0 and (key % 3 == 0)}
+              print(nums)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Set Comprehension</h4>
+          <p style='font-size: .9em'>
+            E também pode ser usado para conjuntos!
+          </p>
+          <p class='fragment' style='font-size: .7em'>
+            Sintaxe:<br/>
+            <code>{<em>expressão</em> for <em>item</em> in <em>iterável</em>
+             if <em>condição</em>}</code>
+          </p>
+        </section>
+
+
+
+        <section>
+          <p>
+            E também pode ser usado para conjuntos!
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 10em;'>
+            <script type='text/x.ace-brython'>
+              # conjunto com os números que são divisíveis por 2 e por 3
+              nums = {key for key in range(30) if key % 2 == 0 and (key % 3 == 0)}
+              print(nums)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h3>Strings</h3>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Como visto anteriormente, <em>Strings</em> são 
+            sequências de caracteres
+          </p>
+          <div style='
+                font-size: .9em;
+                display: flex;
+                gap: 1ex;
+                flex-wrap: wrap;
+                justify-content: center;
+            '>
+                <code>"Charles"</code>
+                <code>'Lorem Ipsum dolor sit amet'</code>
+                <code>'0800-1111-0000'</code>
+                <code>"Avenida 24A, número 1515"</code>
             </div>
         </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Strings</h4>
+          <p>Agora que estudamos Coleções, podemos enxergar strings
+            como <em>coleções de caracteres</em>!
+          </p>
+        </section>
+
+
+        <section data-auto-animate>
+          <h4>Strings</h4>
+          <p>Agora que estudamos Coleções, podemos enxergar strings
+            como <em>coleções de caracteres</em>!
+          </p>
+          <p>
+            E desta maneira explorar os recursos disponíveis para este
+            tipo de dado.
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Podemos utilizar indexação em strings também!
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Podemos utilizar indexação em strings também!
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 16em;'>
+            <script type='text/x.ace-brython' data-id='string-index'>
+              palavra = 'paralelepípedo'
+
+              print(palavra[2])   # caracter na posição 2
+              print(palavra[-2])  # caracter na penúltima posição
+              print(palavra[:5])  # fatia do começo até a posição 5
+              print(palavra[2:])  # fatia da posição 2 até o fim
+              print(palavra[:-6]) # fatia do começo à sexta posição reversa
+              print(palavra[-6:]) # fatia da sexta posição reversa até o fim
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Porém devemos lembrar que strings são <em>imutáveis</em>
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Porém devemos lembrar que strings são <em>imutáveis</em>
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 8em;'>
+            <script type='text/x.ace-brython' data-id='string-index2'>
+              solido = 'Octaedro'
+
+              print(solido[:4])
+              print('Dodeca' + solido[4:])
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Porém devemos lembrar que strings são <em>imutáveis</em>
+          </p>
+          <p>
+            Então não podemos alterar seu conteúdo
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 16em;'>
+            <script type='text/x.ace-brython' data-id='string-index3'>
+              solido = 'Octaedro'
+
+              print(solido[:4])
+              print('Dodeca' + solido[4:])
+              solido[:4] = 'Dodeca'
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Porém devemos lembrar que strings são <em>imutáveis</em>
+          </p>
+          <p>
+            Então não podemos alterar seu conteúdo
+          </p>
+          <p>
+            Mas podemos atribuir um novo valor à variável!
+          </p>
+          <div class='ace-brython' style='font-size: .4em; height: 12em;'>
+            <script type='text/x.ace-brython' data-id='string-index4'>
+              solido = 'Octaedro'
+
+              print(solido[:4])
+              print('Dodeca' + solido[4:])
+              solido = 'Dodeca' + solido[4:]
+              print('Novo sólido:', solido)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Podemos utilizar indexação de strings para identificação de
+            sufixos
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Podemos utilizar indexação de strings para identificação de
+            prefixos e sufixos
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
+            <script type='text/x.ace-brython'>
+              poliedros_platonicos = ['Tetraedro', 'Hexaedro', 'Octaedro',
+                'Dodecaedro', 'Icosaedro']
+
+              significados = {
+                'Tetra':{ 'faces':4,'vertices':4,'arestas':6,'elemento':'fogo'},
+                'Hexa':{'faces':6,'vertices':8,'arestas':12,'elemento':'terra'},
+                'Octa':{'faces':8, 'vertices':6, 'arestas':12,'elemento':'ar'},
+                'Dodeca':{'faces':12, 'vertices':20, 'arestas':30,'elemento':'água'},
+                'Icosa':{'faces':20, 'vertices':12, 'arestas':30,'elemento':'universo'},
+              }
+
+              for p in poliedros_platonicos:
+                print(p,significados[p[:-4]])
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Além de indexação, existem métodos específicos de strings
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Divisão de strings
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 22em;'>
+            <script type='text/x.ace-brython' data-id='string-split'>
+              estrofe = ('Minha terra tem palmeiras,/Onde canta o Sabiá;/'
+                        'As aves, que aqui gorjeiam,/Não gorjeiam como lá')
+
+              print(estrofe, '\n')
+
+              # Dividindo a estrofe em versos utilizando o separador /
+              versos = estrofe.split('/')
+              print(versos, '\n')
+              for v in versos:
+                print(v)
+            </script>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <p>
+            Divisão de strings
+          </p>
+          <img style='height: 3em'  data-src="images/bandeira_leme.png"/>
+          <div class='ace-brython' style='font-size: .5em; height: 22em;'>
+            <script type='text/x.ace-brython' data-id='string-split-leme'>
+              estrofe = (
+                'Teus coqueiros que brilham ao Sol/'
+                'São o emblema do grande valor/'
+                'Dos teus filhos de dotes de escol,/'
+                'Da lhaneza, do sincero amor.'
+              )
+
+              print(estrofe, '\n')
+
+              # Dividindo a estrofe em versos utilizando o separador /
+              versos = estrofe.split('/')
+              print(versos, '\n')
+              for v in versos:
+                print(v)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            União de strings presente em um iterável
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 14em;'>
+            <script type='text/x.ace-brython' data-id='string-join'>
+              versos = [
+                'Teus coqueiros que brilham ao Sol',
+                'São o emblema do grande valor',
+                'Dos teus filhos de dotes de escol,',
+                'Da lhaneza, do sincero amor.',
+              ]
+
+              # Unindo lista de strings em uma só string
+              estrofe = ' '.join(versos)
+              print(estrofe)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Ficou uma string comprida, difícil de ler...
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Ficou uma string comprida, difícil de ler...
+          </p>
+          <p>
+            E se alterássemos a string separadora?
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            E se alterássemos a string separadora?
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 18em;'>
+            <script type='text/x.ace-brython' data-id='string-join-linebreak'>
+              versos = [
+                'Teus coqueiros que brilham ao Sol',
+                'São o emblema do grande valor',
+                'Dos teus filhos de dotes de escol,',
+                'Da lhaneza, do sincero amor.',
+              ]
+
+              # Unindo lista de strings em uma só string
+              estrofe = '\n'.join(versos)
+              print(estrofe)
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Verificação e manipulação de letras maiúsculas e minúsculas
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
+            <script type='text/x.ace-brython' data-id='string-casing'>
+              obra = 'Memórias Póstumas de Brás Cubas'
+
+              print('Tudo minúsculo?',obra.islower())
+              print('Tudo maiúsculo?',obra.isupper())
+              print('Título?',obra.istitle())
+              print('')
+              print('Tudo minúsculo:',obra.lower())
+              print('Tudo maiúsculo:',obra.upper())
+              print('Título:',obra.title())
+              print('Invertidas:',obra.swapcase())
+            </script>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            Entre outras...
+          </p>
+          <div style='font-size: .7em'>
+            Lista completa<br>
+            <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target='_blank'>
+              aqui na documentação</a>
+          </div>
+        </section>
+
+
+
+        <section>
+          <h3>Classes</h3>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            O que é uma classe?
+          </p>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            O que é uma classe?
+          </p>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              É um projeto ou protótipo definido pelo usuário a partir do qual o objetos são criados.
+            </p>
+          </div>
+            <h2 class='fragment local-standout-box'>
+                Entendi foi é nada! 🤦‍♂️
+            </h2>
+        </section>
+
+        <section data-auto-animate>
+          <p>
+            As classes fornecem um meio de agrupar dados e funcionalidades.
+          </p>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            As classes fornecem um meio de agrupar dados e funcionalidades.
+          </p>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              A criação de uma nova classe cria um novo tipo de objeto, permitindo que novas instâncias desse tipo sejam feitas.
+            </p>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            As classes fornecem um meio de agrupar dados e funcionalidades.
+          </p>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p style='opacity: .5'>
+              A criação de uma nova classe cria um novo tipo de objeto, permitindo que novas instâncias desse tipo sejam feitas.
+            </p>
+          </div>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              Cada instância de classe pode ter atributos anexados a ela para manter
+              seu estado, e podem também ter métodos (definidos por sua classe) para manipulação seus estados.
+            </p>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <p>
+            Para exemplificar classes, tomemos automóveis como exemplo.
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            Para exemplificar classes, tomemos automóveis como exemplo.
+          <div style='text-align: left; margin-top: 1em;'>
+            <p'>
+              Existem diversas categorias, como carros, lanchas, motos,
+              jet skis, caminhões, navios, etc. 
+            </p>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            Para exemplificar classes, tomemos automóveis como exemplo.
+          <div style='text-align: left; margin-top: 1em;'>
+            <p style='opacity: .5'>
+              Existem diversas categorias, como carros, lanchas, motos,
+              jet skis, caminhões, navios, etc. 
+            </p>
+          </div>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              Podemos dizer que essas categorias são classes de automóveis, cada
+              qual com suas características (atributos de classe) e funcionalidades (métodos de classe).
+            </p>
+          </div>
+        </section>
+
+        <section data-auto-animate>
+          <p'>
+            Um carro possui características como número de portas, marca, ano
+            de fabricação, tipo do banco, tipo do vidro, entre outras mais.
+          <div style='text-align: left; margin-top: 1em;'>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            Uma carro possui características como número de portas, marca, ano
+            de fabricação, tipo do banco, tipo do vidro, entre outras mais.
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              Portanto, essas características são os <b>atributos</b> da classe carro.
+            </p>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>
+            Além das características do carro, existem também as
+            funcionalidades dele, como acelerar, frear, ligar rádio,
+            subir/descer vidro, travar/destravar portas.
+          <div style='text-align: left; margin-top: 1em;'>
+        </section>
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            Além das características do carro, existem também as
+            funcionalidades dele, como acelerar, frear, ligar rádio,
+            subir/descer vidro, travar/destravar portas.
+            
+          <div style='text-align: left; margin-top: 1em;'>
+            <p'>
+              Essas funcionalidade são responsáveis por realizar alterações no
+              carro ou em seu estado, sendo então os <b>métodos</b> da classe carro.
+            </p>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>
+            Criação de uma classe ²
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
+            <script type='text/x.ace-brython' data-id='point-class'>
+              # Exemplo de uma classe simples que não é subclasse de nenhuma outra
+              # e nem recebe parâmetros durante sua criação.
+
+              # Criação da classe
+              class Ponto:
+                x = 25
+                y = 20
+
+              # Criação de um objeto (ponto1) da classe Ponto
+              ponto1 = Ponto
+              print('Posição X do ponto',ponto1.x)
+              print('Posição Y do ponto',ponto1.y)
+
+              print()
+              # Criação de um outro objeto (ponto2) da classe Ponto
+              ponto2 = Ponto
+              print('Posição X do ponto',ponto2.x)
+              print('Posição Y do ponto',ponto2.y)
+            </script>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>
+            Apesar de mostrar como criar uma classe, o exemplo a acima é
+            simplista demais e não é utilizado no mundo real, pois a classe
+            criada por ele não serve para muita coisa, além de ter os valores
+            pré-definidos. Com isso em mente, vamos recriar essa classe,
+            melhorando seu funcionamento.
+          <div style='text-align: left; margin-top: 1em;'>
+        </section>
+
+        <section data-auto-animate>
+          <p>
+            Criação de uma classe
+          </p>
+          <div class='ace-brython' style='font-size: .5em; height: 20em;'>
+            <script type='text/x.ace-brython' data-id='recreate-point-class'>
+              # Criação da classe
+              class Ponto:
+                def __init__(self, coordX, coordY):
+                  self.x = coordX
+                  self.y = coordY
+
+              ponto1 = Ponto(25,30)
+              ponto2 = Ponto(50,12)
+
+              print('Ponto1')
+              print('\tCoordenada X',ponto1.x)
+              print('\tCoordenada Y',ponto1.y)
+
+              print('Ponto2')
+              print('\tCoordenada X',ponto2.x)
+              print('\tCoordenada Y',ponto2.y)
+            </script>
+          </div>
+        </section>
+
+
+        <section data-auto-animate>
+          <p>
+            Apesar de mostrar como criar uma classe, o exemplo a acima é
+            simplista demais e não é utilizado no mundo real, pois a classe
+            criada por ele não serve para muita coisa, além de ter os valores
+            pré-definidos. Com isso em mente, vamos recriar essa classe,
+            melhorando seu funcionamento.
+          <div style='text-align: left; margin-top: 1em;'>
+        </section>
+
+        <section data-auto-animate>
+          <p>
+            Criação de uma classe que faz mais sentido
+          </p>
+          <div class='ace-brython' style='font-size: .4em; height: 20em;'>
+            <script type='text/x.ace-brython' data-id='real-point-class'>
+              # Criação da classe
+              class Ponto:
+                def __init__(self, coordX, coordY):
+                  self.x = coordX
+                  self.y = coordY
+                
+                # definição de método para exibir os atributos X e Y
+                def mostrar_coord(self):
+                  print('Coordenadas X e Y:', self.x, self.y)
+
+                # definição de método para alterar o valor dos atributos
+                def mover_ponto(self, tup):
+                  self.x, self.y = tup
+
+              ponto1 = Ponto(25, 30)
+              ponto2 = Ponto(50, 12)
+
+              print('Valores iniciais')
+              ponto1.mostrar_coord()
+              ponto2.mostrar_coord()
+
+              ponto1.mover_ponto((13, 74))
+              ponto2.mover_ponto((32, 53))
+
+              print('Valores Alterados')
+              ponto1.mostrar_coord()
+              ponto2.mostrar_coord()
+            </script>
+          </div>
+        </section>
+
+
+
+
+        <section>
+          <h3>Módulos</h3>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p>
+            O que é um módulo?
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='opacity: .5'>
+            O que é um módulo?
+          </p>
+          <div style='text-align: left; margin-top: 1em;'>
+            <p>
+              De forma geral, um <strong>módulo</strong> é um arquivo:
+            </p>
+            <ul>
+              <li class='fragment'>
+                que possui código Python
+              </li>
+              <li class='fragment'>
+                e que pode ser utilizado (<strong>importado</strong>) em outros
+                programas ou módulos
+              </li>
+            </ul>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>
+            Principais motivações para criarmos módulos:
+          </h4>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>
+            Principais motivações para criarmos módulos:
+          </h4>
+          <p style='margin-top: 1em;'>
+            <strong>Deixar o código mais organizado</strong>
+            <br/>
+            Cada módulo mantendo funcionalidades relacionadas a um tópico
+            específico
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>
+            Principais motivações para criarmos módulos:
+          </h4>
+          <p style='margin-top: 1em;'>
+            <strong>Reuso de código</strong>
+            <br/>
+            Um módulo pode ser importado por uma variedade de diferentes
+            programas (ou outros módulos) que dependem de uma funcionalidade
+            comum provida pelo módulo
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <div style='font-size: .8em'>
+            <p>
+              Diversos módulos já são providos por padrão em uma instalação comum
+              de Python:
+            </p>
+            <div
+              style='
+                display: grid;
+                grid-template-columns: max-content auto;
+                justify-items: left;
+                align-items: baseline;
+                gap: .2ex 1ex;
+                text-align: left;
+              '
+            >
+              <code style='justify-self: end;'>collections</code>
+              <div>
+                Outros tipos de coleções além das que já conhecemos
+              </div>
+
+              <code style='justify-self: end;'>csv</code>
+              <div>
+                Leitura e escrita no formato CSV
+              </div>
+
+              <code style='justify-self: end;'>datetime</code>
+              <div>
+                Manipulação de data e hora
+              </div>
+
+              <code style='justify-self: end;'>json</code>
+              <div>
+                Leitura e escrita no formato JSON
+              </div>
+
+              <code style='justify-self: end;'>math</code>
+              <div>
+                Funções matemáticas
+              </div>
+
+              <code style='justify-self: end;'>os</code>
+              <div>
+                Interface com o sistema operacional
+              </div>
+
+              <code style='justify-self: end;'>pathlib</code>
+              <div>
+                Manipulação de caminhos e arquivos
+              </div>
+
+              <code style='justify-self: end;'>random</code>
+              <div>
+                Geração de números pseudo-aleatórios
+              </div>
+
+              <code style='justify-self: end;'>re</code>
+              <div>
+                Processamento de strings com expressões regulares!
+              </div>
+            </div>
+            <p>
+              Lista completa em
+              <a
+                href='https://docs.python.org/3/py-modindex.html'
+                target='_blank'
+              >
+                https://docs.python.org/3/py-modindex.html
+              </a>
+            </p>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>
+            Diversos módulos já são providos por padrão em uma instalação comum
+            de Python:
+          </p>
+
+          <br/>
+          <p>
+            Esses módulos pertencem ao que chamamos de
+            <strong>biblioteca padrão</strong> da linguagem Python
+          </p>
+          <br/>
+
+          <p style='font-size: .8em;'>
+            Documentação disponível em
+            <a
+              href='https://docs.python.org/3/library/index.html'
+              target='_blank'
+            >
+              https://docs.python.org/3/library/index.html
+            </a>
+          </p>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+
+          <div style='font-size: .9em;'>
+            <p>
+              Utilizamos <code>import</code> para importar o módulo em nosso
+              código:
+            </p>
+
+            <div class='ace-brython'>
+              <script type='text/x.ace-brython'>
+                import math
+              </script>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+
+          <div style='font-size: .9em;'>
+            <p>
+              Os objetos definidos pelo módulo podem ser acessados através do
+              operador de acesso de atributo (<code>.</code>):
+            </p>
+
+            <div class='ace-brython'>
+              <script type='text/x.ace-brython'>
+                import math
+
+                angulo = math.pi / 6 # Isto é, 30°
+
+                seno = math.sin(angulo)
+
+                print(f'O seno de {angulo} é {seno}')
+              </script>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+
+          <div style='font-size: .9em;'>
+            <p>
+              É possível redefenir o nome da variável que terá a referência ao
+              módulo utilizando a palavra-chave <code>as</code>:
+            </p>
+
+            <div class='ace-brython'>
+              <script type='text/x.ace-brython'>
+                import math as m
+
+                angulo = m.pi / 6 # Isto é, 30°
+
+                seno = m.sin(angulo)
+
+                print(f'O seno de {angulo} é {seno}')
+              </script>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+
+          <div style='font-size: .9em;'>
+            <p>
+              É possível importar objetos do módulo diretamente:
+            </p>
+
+            <div class='ace-brython'>
+              <script type='text/x.ace-brython'>
+                from math import pi, sin
+
+                angulo = pi / 6 # Isto é, 30°
+
+                seno = sin(angulo)
+
+                print(f'O seno de {angulo} é {seno}')
+              </script>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <h4>Exemplo: utilizando o módulo <code>math</code></h4>
+
+          <div style='font-size: .9em;'>
+            <p>
+              ... e também é possível renomear os objetos na importação:
+            </p>
+
+            <div class='ace-brython'>
+              <script type='text/x.ace-brython'>
+                from math import pi as banana, sin
+
+                angulo = banana / 6 # Isto é, 30°
+
+                seno = sin(angulo)
+
+                print(f'O seno de {angulo} é {seno}')
+              </script>
+            </div>
+          </div>
+        </section>
+
+
+
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>Nós podemos criar nossos próprios módulos!</p>
+        </section>
+        <section data-auto-animate>
+          <p style='font-size: .8em;'>Nós podemos criar nossos próprios módulos!</p>
+          <div style='
+                font-size: .6em;
+                display: flex;
+                flex-direction: column;
+                gap: 2ex;
+               '
+           >
+            <div style='flex: 1;'>
+              Arquivo: <code>poligonos.py</code>
+              <div class='ace-brython' data-components='code'>
+                <script type='text/x.ace-brython'>
+                  def retangulo(x, y, largura, altura):
+                      return (
+                          (x, y), (x, y + altura),
+                          (x + largura, y + altura), (x + largura, y),
+                      )
+
+                  def quadrado(x, y, tamanho):
+                      return retangulo(x, y, tamanho, tamanho)
+
+                  def perimetro(pontos):
+                      p = 0
+                      prev = pontos[-1]
+                      for ponto in pontos:
+                          x, y = ponto
+                          prev_x, prev_y = prev
+                          dist = ((x - prev_x)**2 + (y - prev_y)**2)**.5
+                          p += dist
+                          prev = ponto
+                      return p
+                </script>
+              </div>
+            </div>
+            <div>
+              Arquivo: <code>main.py</code>
+              <div class='ace-brython' data-components='code'>
+                <script type='text/x.ace-brython'>
+                  import poligonos
+
+                  q = poligonos.quadrado(0, 0, 20)
+                  print('q:', q)
+                  print('perímetro de q:', poligonos.perimetro(q))
+
+                  r = poligonos.retangulo(12, -50, 60, 20)
+                  print('r:', r)
+                  print('perímetro de r:', poligonos.perimetro(r))
+                </script>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section data-auto-animate style='font-size: .8em;'>
+          <p>Como Python encontra o módulo <code>poligonos</code>?</p>
+        </section>
+        <section data-auto-animate style='font-size: .8em'>
+          <p>Como Python encontra o módulo <code>poligonos</code>?</p>
+
+          <p style='margin-top: 1em;'>A resolução é feita nesta ordem:</p>
+          <ol>
+            <li>
+              Primeiro procura por um módulo <em>built-in</em> com o nome
+              "polígono" (não é nosso caso);
+            </li>
+            <li>
+              Depois ele procura por um arquivo nomeado "poligono.py" na lista
+              de diretórios definida em <code>sys.path</code>.
+            </li>
+          </ol>
+        </section>
+
+
+        <section>
+          <div class='r-fit-text'>Até a próxima!</div>
+        </section>
+
       </div>
     </div>
 
